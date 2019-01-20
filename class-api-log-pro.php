@@ -21,6 +21,8 @@ require_once 'includes/class-api-log-pro-db.php';
 require_once 'includes/class-api-log-pro-rest-api.php';
 require_once 'includes/class-api-log-pro-cli.php';
 
+require_once 'admin/admin-page.php';
+
 if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 	/**

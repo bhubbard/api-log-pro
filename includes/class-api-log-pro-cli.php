@@ -44,9 +44,9 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			 */
 			public function delete( $args, $assoc_args ) {
 
-				$api_log_pro   = new API_Log_PRO();
-				$results       = $api_log_pro->delete_logs();
-				$meta_results       = $api_log_pro->delete_logs_meta();
+				$api_log_pro  = new API_Log_PRO();
+				$results      = $api_log_pro->delete_logs();
+				$meta_results = $api_log_pro->delete_logs_meta();
 
 				if ( ! empty( $results ) && ! empty( $meta_results ) ) {
 					WP_CLI::success( __( 'The Logs has been cleared.', 'api-log-pro' ) );

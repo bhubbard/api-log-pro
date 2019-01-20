@@ -8,50 +8,57 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if( ! class_exists( 'API_Log_Pro_Rest_API' ) ) {
-	
+if ( ! class_exists( 'API_Log_Pro_Rest_API' ) ) {
+
 	/**
 	 * API_Log_Pro_Rest_API class.
 	 */
 	class API_Log_Pro_Rest_API {
-		
+
 		/**
 		 * Constructor.
-		 * 
+		 *
 		 * @access public
 		 */
 		public function __construct() {
-			
-			add_action( 'rest_api_init', function(){
-				register_rest_route( 'api-log-pro/v1', 'logs', array(
-					'methods'  => array( 'get' ),
-					'callback' => array( $this, 'get_api_logs' ),
-					/*
-					'permission_callback' => array( $this, 'permission_check' ),
-					*/
-				));
-			});
-		
+
+			add_action(
+				'rest_api_init',
+				function() {
+					register_rest_route(
+						'api-log-pro/v1',
+						'logs',
+						array(
+							'methods'  => array( 'get' ),
+							'callback' => array( $this, 'get_api_logs' ),
+						/*
+						'permission_callback' => array( $this, 'permission_check' ),
+						*/
+						)
+					);
+				}
+			);
+
 		}
-		
+
 		/**
 		 * Get API Logs.
-		 * 
+		 *
 		 * @access public
 		 * @param WP_REST_Request $request Request.
 		 */
 		public function get_api_logs( WP_REST_Request $request ) {
-			
+
 			$api_log_pro = new API_Log_Pro() ?? false;
-			$results = $api_log_pro->get_logs() ?? array();
-			
+			$results     = $api_log_pro->get_logs() ?? array();
+
 			// TODO: Acutally Format Response.
 			return rest_ensure_response( $results );
 		}
-		
+
 		/**
 		 * Permission Check..
-		 * 
+		 *
 		 * @access public
 		 * @param mixed $data Data.
 		 */
@@ -61,9 +68,9 @@ if( ! class_exists( 'API_Log_Pro_Rest_API' ) ) {
 			}
 			return true;
 		}
-		
+
 	}
-	
+
 	new API_Log_Pro_Rest_API();
-	
+
 }
