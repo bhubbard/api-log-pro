@@ -1,8 +1,13 @@
 <?php
+/**
+ * API Log Pro Admin - Logs Archive.
+ *
+ * @package api-log-pro
+ */
 
-	$log_id = filter_input( INPUT_GET, 'log_id' );
+$log_id = filter_input( INPUT_GET, 'log_id' ) ?? null;
 
-if ( ! empty( $log_id ) ) {
+if ( ! empty( $log_id ) || null !== $log_id ) {
 	include_once 'details.php';
 } else {
 

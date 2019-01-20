@@ -26,11 +26,6 @@ function api_log_pro_menu_active_tab() {
 	return isset( $active_tab ) ? $active_tab : 'logs';
 }
 
-function api_log_details_page() {
-	$log_id = filter_input( INPUT_GET, 'log_id' );
-	return $log_id;
-}
-
 /**
  * Idxbrokerpro_menu_active_subtab function.
  *
@@ -53,7 +48,7 @@ function api_log_pro_page() {
 
 	$active_tab = api_log_pro_menu_active_tab();
 
-	$tabs = array( 'logs', 'settings', 'support' );
+	$tabs = array( 'logs', 'support' );
 
 	?>
 	<div class="wrap settings">
@@ -116,7 +111,15 @@ function api_log_pro_page() {
 	font-weight: 400;
 	text-align: center;
 }
+.js .postbox .hndle {
+	cursor: auto !important;
+}
+@import "https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css";
+
 			</style>
+			
+			<?php wp_enqueue_script( 'prism', 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js', array( 'jquery' ), null, true ); ?>
+
 				<h2 class="nav-tab-wrapper">
 				<?php
 
@@ -127,7 +130,7 @@ function api_log_pro_page() {
 						$active_tab_class = '';
 					}
 
-					echo '<a href="?page=apilogpro&#38;tab=' . $tab . '" class="nav-tab ' . $active_tab_class . ' nav-tab-' . $tab . '">' . ucwords( $tab ) . '</a>';
+					echo '<a href="?page=apilogpro&#38;tab=' . esc_html( $tab ) . '" class="nav-tab ' . esc_html( $active_tab_class ) . ' nav-tab-' . esc_html( $tab ) . '">' . ucwords( $tab ) . '</a>';
 				}
 				?>
 				</h2>	<div class="wrap">
