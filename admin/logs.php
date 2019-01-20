@@ -10,7 +10,7 @@ foreach ( $logs as $log ) {
 		'path'        => $log->path ?? '',
 		'status'      => $log->status ?? '',
 		'method'      => $log->method ?? '',
-		'requsted_at' => $log->requsted_at ?? '',
+		'requested_at' => $log->requested_at ?? '',
 	);
 	$data[] = $obj;
 }
@@ -44,7 +44,7 @@ jQuery(function(){
 				title : 'Method'
 			},
 			{
-				data  : 'requsted_at',
+				data  : 'requested_at',
 				title : 'Requested At'
 			}
 		],

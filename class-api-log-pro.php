@@ -130,7 +130,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 					'user'             => $user_id,
 					'requested_at'     => $requested_at ?? '0000-00-00 00:00:00',
 				),
-				array( '%d', '%s', '%s', '%s', '%s', '%d', '%s' )
+				array( '%d', '%s', '%s', '%s', '%s', '%d', '%s', '%s', '%s' )
 			);
 
 			return $wpdb->insert_id;
