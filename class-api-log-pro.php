@@ -18,6 +18,8 @@ defined( 'ABSPATH' ) || exit;
 
 
 require_once 'includes/class-api-log-pro-db.php';
+require_once 'includes/class-api-log-pro-rest-api.php';
+require_once 'includes/class-api-log-pro-cli.php';
 
 if ( ! class_exists( 'API_Log_Pro' ) ) {
 
@@ -118,6 +120,58 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			);
 
 			return $wpdb->insert_id;
+
+		}
+
+		/**
+		 * Delete All Logs.
+		 *
+		 * @access public
+		 * @param array $args (default: array()) Arguments.
+		 */
+		public function delete_logs( $args = array() ) {
+
+			global $wpdb;
+
+			$table = $wpdb->prefix . 'api_log_pro';
+
+			$results = $wpdb->get_results( "TRUNCATE TABLE $table" );
+
+			return $results;
+		}
+
+		/**
+		 * Delete All Logs Metadata.
+		 *
+		 * @access public
+		 * @param array $args (default: array()) Arguments.
+		 */
+		public function delete_logs_meta( $args = array() ) {
+
+			global $wpdb;
+
+			$table = $wpdb->prefix . 'api_log_pro_meta';
+
+			$results = $wpdb->get_results( "TRUNCATE TABLE $table" );
+
+			return $results;
+		}
+
+		/**
+		 * Get All Logs.
+		 *
+		 * @access public
+		 * @param array $args (default: array()) Arguments.
+		 */
+		public function get_logs( $args = array() ) {
+
+			global $wpdb;
+
+			$table = $wpdb->prefix . 'api_log_pro';
+
+			$results = $wpdb->get_results( "SELECT * FROM $table" );
+
+			return $results;
 
 		}
 
