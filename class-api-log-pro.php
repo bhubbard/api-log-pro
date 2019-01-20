@@ -190,6 +190,47 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		}
 
 		/**
+		 * Get Single Log.
+		 *
+		 * @access public
+		 * @param mixed $log_id Log ID.
+		 * @param array $args (default: array()) Arguments.
+		 */
+		public function get_log( $log_id, $args = array() ) {
+
+			global $wpdb;
+
+			$table = $wpdb->prefix . 'api_log_pro';
+
+			$results = $wpdb->get_results( "SELECT * FROM $table WHERE ID = $log_id" );
+
+			if ( ! empty( $results ) ) {
+				return $results[0];
+			} else {
+				return new WP_Error( 'invalid_log_id', __( 'Sorry no log exists with that ID.', 'api-log-pro' ) );
+			}
+
+		}
+
+		/**
+		 * get_all_log_meta function.
+		 *
+		 * @access public
+		 * @param mixed $log_id
+		 * @param array $args (default: array())
+		 */
+		public function get_all_log_meta( $log_id, $args = array() ) {
+
+			global $wpdb;
+
+			$table = $wpdb->prefix . 'api_log_pro_meta';
+
+			$results = $wpdb->get_results( "SELECT * FROM $table WHERE apilog_id = $log_id" );
+
+			return $results;
+		}
+
+		/**
 		 * Get Log Meta.
 		 *
 		 * @access public
@@ -205,7 +246,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		}
 
 		/**
-		 * Add Log Meta..
+		 * Add Log Meta.
 		 *
 		 * @access public
 		 * @param mixed  $log_id Log ID.

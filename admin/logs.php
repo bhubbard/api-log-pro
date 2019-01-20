@@ -1,26 +1,33 @@
 <?php
 
+	$log_id = filter_input( INPUT_GET, 'log_id' );
+
+if ( ! empty( $log_id ) ) {
+	include_once 'details.php';
+} else {
+
+
 	$api_log_pro = new API_Log_Pro();
 
 	$logs = $api_log_pro->get_logs();
 
-foreach ( $logs as $log ) {
-	$obj    = array(
-		'id'          => $log->id ?? '',
-		'path'        => $log->path ?? '',
-		'status'      => $log->status ?? '',
-		'method'      => $log->method ?? '',
-		'requested_at' => $log->requested_at ?? '',
-	);
-	$data[] = $obj;
-}
+	foreach ( $logs as $log ) {
+		$obj    = array(
+			'id'           => $log->id ?? '',
+			'path'         => $log->path ?? '',
+			'status'       => $log->status ?? '',
+			'method'       => $log->method ?? '',
+			'requested_at' => $log->requested_at ?? '',
+		);
+		$data[] = $obj;
+	}
 
 	wp_localize_script( 'data-tables', 'logs_data', array( 'data' => $data ) );
 
 
-echo '<table class="table table-responsive wp-list-table widefat fixed striped" id="logs-table"></table>';
+	echo '<table class="table table-responsive wp-list-table widefat fixed striped" id="logs-table"></table>';
 
-?>
+	?>
 
 <script>
 jQuery(function(){
@@ -29,11 +36,34 @@ jQuery(function(){
 		columns: [
 			{
 				data  : 'id',
-				title : 'Log ID'
+				title : 'Log ID',
+				render: function(data, type, row){
+					if(type == "sort" || type == "type" || type == "undefined" || type == "filter"){
+						return data;
+					}
+
+					var s = data;
+
+						s = '<a href="/wp-admin/admin.php?page=apilogpro&log_id=' + data + '">' + s + '</a>';
+
+					return s;
+				}
 			},
 			{
 				data  : 'path',
-				title : 'Path'
+				title : 'Path',
+				render: function(data, type, row){
+					if(type == "sort" || type == "type" || type == "undefined" || type == "filter"){
+						return data;
+					}
+
+					var s = data;
+
+						s = '<a href="/wp-json' + data + '">' + s + '</a>';
+
+					return s;
+				}
+
 			},
 			{
 				data  : 'status',
@@ -51,19 +81,16 @@ jQuery(function(){
 		pageLength: 10,
 		dom: 'f' + "<'table-responsive't>" + "<'row align-items-center bottom'<'col-sm-5'il><'col-sm-7'p>>",
 		language: {
-			search: '<i class="fas fa-search"></i>',
 			searchPlaceholder: 'Search Logs ...',
 			info: '_START_ to _END_ of _TOTAL_',
 			infoEmpty: "",
 			infoFiltered: "",
 			zeroRecords: "<strong>No api logs could be found.</strong>",
 			lengthMenu: '_MENU_ logs',
-			oPaginate: {
-				sNext: 'Next<i class="far fa-arrow-alt-circle-right ml-2"></i>',
-				sPrevious: '<i class="far fa-arrow-alt-circle-left mr-2"></i></i>Prev',
-			}
 		}
 	});
 
 });
 </script>
+
+<?php } ?>

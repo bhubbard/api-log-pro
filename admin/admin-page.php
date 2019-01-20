@@ -23,7 +23,12 @@ function api_log_pro_menu() {
  */
 function api_log_pro_menu_active_tab() {
 	$active_tab = filter_input( INPUT_GET, 'tab' );
-	return isset( $active_tab ) ? $active_tab : 'companies';
+	return isset( $active_tab ) ? $active_tab : 'logs';
+}
+
+function api_log_details_page() {
+	$log_id = filter_input( INPUT_GET, 'log_id' );
+	return $log_id;
 }
 
 /**
@@ -85,6 +90,32 @@ function api_log_pro_page() {
 					float: left;
 					margin: 5px;
 				}
+				#logs-table_length {
+					float:left;
+					display: inline-block;
+				}
+				#logs-table_paginate {
+					float: right;
+					display: inline-block;
+				}
+				a.paginate_button {
+	height: 16px;
+	border-color: #ddd;
+	background: #f7f7f7;
+	color: #a0a5aa;
+	margin: 5px;
+
+	
+		display: inline-block;
+	min-width: 17px;
+	border: 1px solid #ccc;
+	padding: 3px 5px 7px;
+	background: #e5e5e5;
+	font-size: 16px;
+	line-height: 1;
+	font-weight: 400;
+	text-align: center;
+}
 			</style>
 				<h2 class="nav-tab-wrapper">
 				<?php
@@ -95,7 +126,8 @@ function api_log_pro_page() {
 					} else {
 						$active_tab_class = '';
 					}
-						echo '<a href="?page=apilogpro&#38;tab=' . $tab . '" class="nav-tab ' . $active_tab_class . ' nav-tab-' . $tab . '">' . ucwords( $tab ) . '</a>';
+
+					echo '<a href="?page=apilogpro&#38;tab=' . $tab . '" class="nav-tab ' . $active_tab_class . ' nav-tab-' . $tab . '">' . ucwords( $tab ) . '</a>';
 				}
 				?>
 				</h2>	<div class="wrap">
@@ -104,17 +136,19 @@ function api_log_pro_page() {
 
 	<?php
 
-	if ( $active_tab ) {
+	if ( $active_tab && in_array( $active_tab, $tabs, true ) ) {
 
 		include_once $active_tab . '.php';
 
 	} else {
-		echo 'Coming Soon.';
+		echo esc_html_e( 'Sorry you are trying to visit the wrong tab.', 'api-log-pro' );
 	}
+
 	?>
 	</div>
 	</form>
 
-</div><?php
+</div>
+	<?php
+
 }
-?>
