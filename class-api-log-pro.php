@@ -54,17 +54,24 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 				$request_uri = esc_url( $_SERVER['REQUEST_URI'] ) ?? null;
 
-				$path             = $request->get_route() ?? '';
-				$method           = $request->get_method() ?? '';
-				$request_headers  = $request->get_headers() ?? '';
-				$response_headers = $response->get_headers() ?? '';
+				$path            = $request->get_route() ?? '';
+				$method          = $request->get_method() ?? '';
+				$request_headers = $request->get_headers() ?? array();
+
+				if ( ! empty( $response ) ) {
+					$response_headers = $response->get_headers() ?? array();
+					$data             = $response->get_data() ?? array();
+					$status           = $response->get_status() ?? '';
+				}
 
 				$args = array(
 					'path'             => $path ?? '',
-					'response'         => $response ?? '',
+					'response'         => $data ?? '',
 					'response_headers' => $response_headers ?? '',
 					'request_headers'  => $request_headers ?? '',
-					'load_time'        => wp_json_encode( array( 'time' => time() ) ) ?? '',
+					'status'           => $status ?? '',
+					'method'           => $method ?? '',
+					'user'             => '',
 					'requested_at'     => current_time( 'mysql' ) ?? '0000-00-00 00:00:00',
 				);
 
@@ -104,6 +111,9 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			$request_headers  = $args['request_headers'] ?? '';
 			$load_time        = $args['load_time'] ?? '';
 			$requested_at     = $args['requested_at'] ?? '';
+			$status           = $args['status'] ?? '';
+			$method           = $args['method'] ?? '';
+			$user_id          = $args['user_id'] ?? '';
 
 			$results = $wpdb->insert(
 				$table,
@@ -113,7 +123,9 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 					'response'         => wp_json_encode( $response ),
 					'response_headers' => wp_json_encode( $response_headers ),
 					'request_headers'  => wp_json_encode( $request_headers ),
-					'load_time'        => $load_time,
+					'status'           => $status,
+					'method'           => $method,
+					'user'             => $user_id,
 					'requested_at'     => $requested_at ?? '0000-00-00 00:00:00',
 				),
 				array( '%d', '%s', '%s', '%s', '%s', '%d', '%s' )

@@ -48,7 +48,9 @@ if ( ! class_exists( 'API_Log_Pro_DB' ) ) {
 				response longtext,
 				request_headers longtext,
 				response_headers longtext,
-				load_time bigint,
+				status mediumint(9),
+				method text,
+				user mediumint(9),
 				requested_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				UNIQUE KEY id (id)
 			) $charset_collate;";
