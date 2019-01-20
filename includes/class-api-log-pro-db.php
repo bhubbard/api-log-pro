@@ -1,38 +1,43 @@
 <?php
-	
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;	
+/**
+ * API Log Pro DB.
+ *
+ * @package api-log-pro
+ */
 
-if( ! class_exists( 'API_Log_Pro_DB' ) ) {
-	
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+if ( ! class_exists( 'API_Log_Pro_DB' ) ) {
+
 	/**
 	 * API_Log_Pro_DB class.
 	 */
 	class API_Log_Pro_DB {
-		
+
 		/**
 		 * Constructor
-		 * 
+		 *
 		 * @access public
 		 */
 		public function __construct() {
-			
+
 				add_action( 'activated_plugin', array( $this, 'create_log_db' ) );
 				add_action( 'activated_plugin', array( $this, 'create_log_meta_db' ) );
-				
+
 				add_action( 'plugins_loaded', array( $this, 'register_log_meta_table' ) );
 
 		}
-		
+
 		/**
 		 * Create Log DB.
-		 * 
+		 *
 		 * @access public
 		 */
 		public function create_log_db() {
-			
+
 			global $wpdb;
-			
+
 			$wpdb->show_errors();
 			$charset_collate = $wpdb->get_charset_collate();
 			$table_name      = $wpdb->prefix . 'api_log_pro';
@@ -51,16 +56,16 @@ if( ! class_exists( 'API_Log_Pro_DB' ) ) {
 			dbDelta( $sql );
 
 		}
-		
+
 		/**
 		 * Create Log Meta DB.
-		 * 
+		 *
 		 * @access public
 		 */
 		public function create_log_meta_db() {
-			
+
 				global $wpdb;
-				
+
 				$charset_collate = $wpdb->get_charset_collate();
 				$table_name      = $wpdb->prefix . 'api_log_pro_meta';
 				$sql             =
@@ -76,22 +81,20 @@ if( ! class_exists( 'API_Log_Pro_DB' ) ) {
 				require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 				dbDelta( $sql );
 		}
-		
+
 		/**
 		 * Register Log Meta Table.
-		 * 
+		 *
 		 * @access public
 		 */
 		public function register_log_meta_table() {
-			
+
 			global $wpdb;
 
-			$results = $wpdb->apilogmeta = $wpdb->prefix . 'api_log_pro_meta';
-			
-			return $results;
+			$wpdb->apilogmeta = $wpdb->prefix . 'api_log_pro_meta';
 
 		}
 	}
-	
+
 	new API_Log_Pro_DB();
 }
