@@ -213,11 +213,11 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		}
 
 		/**
-		 * get_all_log_meta function.
+		 * Get All Log Meta.
 		 *
 		 * @access public
-		 * @param mixed $log_id
-		 * @param array $args (default: array())
+		 * @param mixed $log_id Log ID.
+		 * @param array $args (default: array()) Arguments.
 		 */
 		public function get_all_log_meta( $log_id, $args = array() ) {
 
