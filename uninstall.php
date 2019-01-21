@@ -8,9 +8,16 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-$api_log_pro_db = new API_Log_Pro_DB();
 
 
-$delete_log_table = $api_log_pro_db->delete_log_db();
 
-$delete_meta_table = $api_log_pro_db->delete_log_meta_table();
+	global $wpdb;
+
+	// Drop Log Table.
+	$log_table   = $wpdb->prefix . 'api_log_pro';
+	$results = $wpdb->query( $wpdb->prepare( 'DROP TABLE IF EXISTS %s', $log_table ) );
+
+	// Drop Meta Table.
+	$meta_table   = $wpdb->prefix . 'api_log_pro_meta';
+	$results = $wpdb->query( $wpdb->prepare( 'DROP TABLE IF EXISTS %s', $meta_table ) );
+
