@@ -1,6 +1,8 @@
 # API Log Pro.
 A simple plugin to log WordPress Rest API Requests.
 
+[![Build Status](https://travis-ci.com/bhubbard/api-log-pro.svg?token=kkcazsQEFZQ5dR7MwDsz&branch=master)](https://travis-ci.com/bhubbard/api-log-pro)
+
 * **Contributors:** [bhubbard](https://profiles.wordpress.org/bhubbard)
 * **Tags:** wp rest api, rest api, wp api, api, json, json api, logging
 * **Requires at least:** 5.0
