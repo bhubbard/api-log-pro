@@ -8,7 +8,8 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-$log_id = filter_input( INPUT_GET, 'log_id' );
+// Get Log ID.
+$log_id = filter_input( INPUT_GET, 'log_id' ) ?? '';
 
 $api_log_pro = new API_Log_Pro();
 
