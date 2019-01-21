@@ -39,10 +39,9 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			if ( ! is_admin() ) {
 
-				add_filter( 'rest_request_after_callbacks', array( $this, 'log_requests' ), 10, 3 );
+				add_filter( 'rest_post_dispatch', array( $this, 'log_requests' ), 10, 3 );
 
-				add_filter( 'rest_post_dispatch', array( $this, 'log_rest_api_errors' ), 10, 3 );
-
+				// add_filter( 'rest_post_dispatch', array( $this, 'log_rest_api_errors' ), 10, 3 ); // Send API Errors to Error Log.
 			}
 
 			add_action( 'admin_init', array( $this, 'register_scripts' ) );
@@ -70,19 +69,17 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		 */
 		public function log_requests( $response, $handler, $request ) {
 
-			if ( ! is_wp_error( $response ) ) {
-
 				$request_uri = esc_url( $_SERVER['REQUEST_URI'] ) ?? null;
 
 				$path            = $request->get_route() ?? '';
 				$method          = $request->get_method() ?? '';
 				$request_headers = $request->get_headers() ?? array();
 
-				if ( ! empty( $response ) ) {
-					$response_headers = $response->get_headers() ?? array();
-					$data             = $response->get_data() ?? array();
-					$status           = $response->get_status() ?? '';
-				}
+			if ( ! empty( $response ) ) {
+				$response_headers = $response->get_headers() ?? array();
+				$data             = $response->get_data() ?? array();
+				$status           = $response->get_status() ?? '';
+			}
 
 				$args = array(
 					'path'             => $path ?? '',
@@ -104,8 +101,6 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 				$this->add_log_meta( $inserted_log_id, 'query_count', $query_count, true );
 				$this->add_log_meta( $inserted_log_id, 'memory_usage', $memory_usage, true );
 				$this->add_log_meta( $inserted_log_id, 'memory_peak_usage', $memory_peak_usage, true );
-
-			}
 
 			// Return Response.
 			return $response;
