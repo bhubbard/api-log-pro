@@ -43,7 +43,6 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 				add_filter( 'rest_post_dispatch', array( $this, 'log_rest_api_errors' ), 10, 3 );
 
-
 			}
 
 			add_action( 'admin_init', array( $this, 'register_scripts' ) );
@@ -120,18 +119,22 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		 * @param WP_REST_Server   $server  The API server instance.
 		 * @param WP_REST_Request  $request The request used to generate the response.
 		 */
-		function log_rest_api_errors( $result, $server, $request ) {
+		public function log_rest_api_errors( $result, $server, $request ) {
 			if ( $result->is_error() ) {
-				error_log( sprintf(
-					"REST request: %s: %s",
-					$request->get_route(),
-					print_r( $request->get_params(), true )
-				) );
-				error_log( sprintf(
-					"REST result: %s: %s",
-					$result->get_matched_route(),
-					print_r( $result->get_data(), true )
-				) );
+				error_log(
+					sprintf(
+						'REST request: %s: %s',
+						$request->get_route(),
+						print_r( $request->get_params(), true )
+					)
+				);
+				error_log(
+					sprintf(
+						'REST result: %s: %s',
+						$result->get_matched_route(),
+						print_r( $result->get_data(), true )
+					)
+				);
 			}
 			return $result;
 		}
