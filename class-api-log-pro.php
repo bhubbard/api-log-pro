@@ -39,6 +39,18 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			add_filter( 'rest_request_after_callbacks', array( $this, 'log_requests' ), 10, 3 );
 
+			add_action( 'admin_init', array( $this, 'register_scripts' ) );
+		}
+
+		/**
+		 * Register Scripts and Styles.
+		 *
+		 * @access public
+		 */
+		public function register_scripts() {
+			wp_register_style( 'api-log-pro-admin', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', null, '0.0.1', 'all' );
+
+			wp_register_script( 'data-tables', 'https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js', array( 'jquery' ), '1.10.19', true );
 		}
 
 		/**
