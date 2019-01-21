@@ -41,8 +41,6 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			add_action( 'admin_init', array( $this, 'register_scripts' ) );
 
-			add_action( 'wp_head', array( $this, 'get_logs' ) );
-
 		}
 
 		/**
@@ -165,7 +163,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			$table = $wpdb->prefix . 'api_log_pro';
 
-			$results = $wpdb->get_results( $wpdb->prepare( 'DELETE * FROM %1s WHERE ID = %2s', $table, $log_id ) );
+			$results = $wpdb->get_results( $wpdb->prepare( 'DELETE * FROM %1s WHERE ID = %d', $table, $log_id ) );
 
 			// TODO: Delete Meta.
 			return $results;
