@@ -237,7 +237,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			$table = $wpdb->prefix . 'api_log_pro';
 
-			$results = $wpdb->get_row( "SELECT * FROM $table WHERE ID = $log_id" );
+			$results = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM %1s WHERE ID = %d', $table, $log_id ) );
 
 			if ( ! empty( $results ) ) {
 				return $results;
@@ -260,7 +260,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			$table = $wpdb->prefix . 'api_log_pro_meta';
 
-			$results = $wpdb->get_results( "SELECT * FROM $table WHERE apilog_id = $log_id" );
+			$results = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM %1s WHERE apilog_id = %d', $table, $log_id ) );
 
 			return $results;
 		}
