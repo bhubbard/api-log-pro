@@ -101,6 +101,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 				$this->add_log_meta( $inserted_log_id, 'query_count', $query_count, true );
 				$this->add_log_meta( $inserted_log_id, 'memory_usage', $memory_usage, true );
 				$this->add_log_meta( $inserted_log_id, 'memory_peak_usage', $memory_peak_usage, true );
+				$this->add_log_meta( $inserted_log_id, 'load_time', timer_stop(1), true );
 
 			// Return Response.
 			return $response;
