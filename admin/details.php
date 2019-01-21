@@ -30,7 +30,7 @@ if ( empty( $log ) || is_wp_error( $log ) ) {
 
 <div class="wrap wp-rest-api-log-entry">
 
-	<a href="<?php echo esc_url( '/wp-admin/admin.php?page=apilogpro' ); ?>"><?php esc_html_e( 'Return to Logs', 'api-log-pro' ); ?></a>
+	<a href="<?php echo esc_url( '/wp-admin/admin.php?page=apilogpro' ); ?>" class="button"><?php esc_html_e( 'Return to Logs', 'api-log-pro' ); ?></a>
 
 <div id="poststuff">
 <div class="postbox request-headers">
