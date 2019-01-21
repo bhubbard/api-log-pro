@@ -59,7 +59,7 @@ if ( empty( $log ) || is_wp_error( $log ) ) {
 	<h3 class="hndle"><span><?php esc_html_e( 'Response', 'api-log-pro' ); ?></span></h3>
 
 	<div class="inside" style="overflow: scroll;">
-		<pre style="overflow:scroll;"><code class="language-json"><?php echo print_r( json_decode( $log->response ), true ); ?></code></pre>
+		<pre style="overflow:scroll;"><code class="json language-json"><?php echo print_r( json_decode( $log->response ), true ); ?></code></pre>
 	</div>
 </div>
 
