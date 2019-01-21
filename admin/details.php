@@ -46,9 +46,8 @@ if ( empty( $log ) || is_wp_error( $log ) ) {
 			<li><strong><?php esc_html_e( 'Log ID:', 'api-log-pro' ); ?></strong> <?php echo esc_html( $log->id ); ?></li>
 			<li><strong><?php esc_html_e( 'Path:', 'api-log-pro' ); ?></strong>  <?php echo esc_html( $log->path ); ?></li>
 			<li><strong><?php esc_html_e( 'Date:', 'api-log-pro' ); ?></strong>
-			<?php // TODO: FIX Date. ?>
-			<?php echo esc_attr( date( 'F j, Y, g:i A T', current_time( time( esc_html( $log->requested_at ) ), $gmt_offset ) ) ); ?>
-			( <?php echo esc_attr( human_time_diff( current_time( time( esc_html( $log->requested_at ) ), $gmt_offset ), current_time( 'timestamp', $gmt_offset ) ) . esc_html( ' ago', 'api-log-pro' ) ); ?>)
+			<?php echo esc_attr( date( 'F j, Y, g:i A T', current_time( strtotime( $log->requested_at ), $gmt_offset ) ) ); ?>
+			( <?php echo esc_attr( human_time_diff( current_time( strtotime( $log->requested_at ), $gmt_offset ), current_time( 'timestamp', $gmt_offset ) ) . esc_html( ' ago', 'api-log-pro' ) ); ?>)
 			</li>
 			<li><strong><?php esc_html_e( 'Method:', 'api-log-pro' ); ?></strong> <?php echo esc_html( $log->method ); ?></li>
 			<li><strong><?php esc_html_e( 'Status:', 'api-log-pro' ); ?></strong> <?php echo esc_html( $log->status ); ?></li>
