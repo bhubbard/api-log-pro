@@ -40,6 +40,9 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			add_filter( 'rest_request_after_callbacks', array( $this, 'log_requests' ), 10, 3 );
 
 			add_action( 'admin_init', array( $this, 'register_scripts' ) );
+
+			add_action( 'wp_head', array( $this, 'get_logs' ) );
+
 		}
 
 		/**
@@ -154,7 +157,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		 *
 		 * @access public
 		 * @param mixed $log_id Log ID.
-		 * @param bool $meta (default: true) Optional, delete meta data.
+		 * @param bool  $meta (default: true) Optional, delete meta data.
 		 */
 		public function delete_api_log( $log_id, $meta = true ) {
 
@@ -162,10 +165,9 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			$table = $wpdb->prefix . 'api_log_pro';
 
-			$results = $wpdb->get_results( "DELTE * FROM $table WHERE ID = $log_id" );
+			$results = $wpdb->get_results( $wpdb->prepare( 'DELETE * FROM %1s WHERE ID = %2s', $table, $log_id ) );
 
 			// TODO: Delete Meta.
-
 			return $results;
 
 		}
@@ -182,7 +184,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			$table = $wpdb->prefix . 'api_log_pro';
 
-			$results = $wpdb->get_results( "TRUNCATE TABLE $table" );
+			$results = $wpdb->query( $wpdb->prepare( 'TRUNCATE TABLE %1s', $table ) );
 
 			return $results;
 		}
@@ -199,7 +201,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			$table = $wpdb->prefix . 'api_log_pro_meta';
 
-			$results = $wpdb->get_results( "TRUNCATE TABLE $table" );
+			$results = $wpdb->query( $wpdb->prepare( 'TRUNCATE TABLE %1s', $table ) );
 
 			return $results;
 		}
@@ -216,7 +218,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			$table = $wpdb->prefix . 'api_log_pro';
 
-			$results = $wpdb->get_results( "SELECT * FROM $table" );
+			$results = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM %1s', $table ) );
 
 			return $results;
 
@@ -235,10 +237,10 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			$table = $wpdb->prefix . 'api_log_pro';
 
-			$results = $wpdb->get_results( "SELECT * FROM $table WHERE ID = $log_id" );
+			$results = $wpdb->get_row( "SELECT * FROM $table WHERE ID = $log_id" );
 
 			if ( ! empty( $results ) ) {
-				return $results[0];
+				return $results;
 			} else {
 				return new WP_Error( 'invalid_log_id', __( 'Sorry no log exists with that ID.', 'api-log-pro' ) );
 			}

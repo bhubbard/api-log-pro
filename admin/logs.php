@@ -19,15 +19,16 @@ if ( ! empty( $log_id ) || null !== $log_id ) {
 
 	$logs = $api_log_pro->get_logs();
 
+	$data = array();
+
 	foreach ( $logs as $log ) {
-		$obj    = array(
+		$data[] = array(
 			'id'           => $log->id ?? '',
 			'path'         => $log->path ?? '',
 			'status'       => $log->status ?? '',
 			'method'       => $log->method ?? '',
 			'requested_at' => $log->requested_at ?? '',
 		);
-		$data[] = $obj;
 	}
 
 	wp_localize_script( 'data-tables', 'logs_data', array( 'data' => $data ) );
