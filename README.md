@@ -12,7 +12,7 @@ A simple plugin to log WordPress Rest API Requests.
 
 ## Description
 
-This plugin enables logging of all calls to the WordPress REST API.
+This plugin enables logging of all calls to the WordPress REST API. You can view all logs from the WordPress Admin under **API Log Pro**.
 
 ### API Access to Logs
 
