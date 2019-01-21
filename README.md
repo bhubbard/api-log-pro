@@ -14,7 +14,7 @@ A simple plugin to log WordPress Rest API Requests.
 
 This plugin enables logging of all calls to the WordPress REST API.
 
-### API Access to logs
+### API Access to Logs
 
 You can use the WordPress api to view the logs if you have `manage options` permssions as a WordPress User. Here is the endpoint:
 

@@ -69,7 +69,7 @@ if ( ! class_exists( 'API_Log_Pro_DB' ) ) {
 			global $wpdb;
 
 			$table   = $wpdb->prefix . 'api_log_pro';
-			$results = $wpdb->query( "DROP TABLE IF EXISTS $table" );
+			$results = $wpdb->query( $wpdb->prepare( 'DROP TABLE IF EXISTS %s', $table ) );
 
 			return $results;
 		}
@@ -122,7 +122,7 @@ if ( ! class_exists( 'API_Log_Pro_DB' ) ) {
 			global $wpdb;
 
 			$table   = $wpdb->prefix . 'api_log_pro_meta';
-			$results = $wpdb->query( "DROP TABLE IF EXISTS $table" );
+			$results = $wpdb->query( $wpdb->prepare( 'DROP TABLE IF EXISTS %s', $table ) );
 
 			return $results;
 		}

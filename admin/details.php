@@ -32,7 +32,10 @@ if ( empty( $log ) || is_wp_error( $log ) ) {
 
 	<a href="<?php echo esc_url( '/wp-admin/admin.php?page=apilogpro' ); ?>" class="button"><?php esc_html_e( 'Return to Logs', 'api-log-pro' ); ?></a>
 
-<!-- <a href="#" class="button button-link-delete"><?php esc_html_e( 'Delete Log', 'api-log-pro' ); ?></a> -->
+	<?php
+		// TODO: Delete Button
+		// echo '<input class="button button-link-delete" type="submit" name="delete_log" id="delete-log-'. $log_id .'" value="'. __( 'Delete Log', 'rest-api-log' ) . '" />'; !
+	?>
 
 <div id="poststuff">
 <div class="postbox request-headers">
@@ -43,8 +46,9 @@ if ( empty( $log ) || is_wp_error( $log ) ) {
 			<li><strong><?php esc_html_e( 'Log ID:', 'api-log-pro' ); ?></strong> <?php echo esc_html( $log->id ); ?></li>
 			<li><strong><?php esc_html_e( 'Path:', 'api-log-pro' ); ?></strong>  <?php echo esc_html( $log->path ); ?></li>
 			<li><strong><?php esc_html_e( 'Date:', 'api-log-pro' ); ?></strong>
-			<?php echo date( 'F j, Y, g:i A T', current_time( time( esc_html( $log->requested_at ) ), $gmt_offset ) ); ?>
-			( <?php echo human_time_diff( current_time( time( esc_html( $log->requested_at ) ), $gmt_offset ), current_time( 'timestamp', $gmt_offset ) ) . __( ' ago', 'api-log-pro' ); ?>)
+			<?php // TODO: FIX Date. ?>
+			<?php echo esc_attr( date( 'F j, Y, g:i A T', current_time( time( esc_html( $log->requested_at ) ), $gmt_offset ) ) ); ?>
+			( <?php echo esc_attr( human_time_diff( current_time( time( esc_html( $log->requested_at ) ), $gmt_offset ), current_time( 'timestamp', $gmt_offset ) ) . esc_html( ' ago', 'api-log-pro' ) ); ?>)
 			</li>
 			<li><strong><?php esc_html_e( 'Method:', 'api-log-pro' ); ?></strong> <?php echo esc_html( $log->method ); ?></li>
 			<li><strong><?php esc_html_e( 'Status:', 'api-log-pro' ); ?></strong> <?php echo esc_html( $log->status ); ?></li>

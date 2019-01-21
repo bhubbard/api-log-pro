@@ -37,7 +37,11 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		 */
 		public function __construct() {
 
-			add_filter( 'rest_request_after_callbacks', array( $this, 'log_requests' ), 10, 3 );
+			if ( ! is_admin() ) {
+
+				add_filter( 'rest_request_after_callbacks', array( $this, 'log_requests' ), 10, 3 );
+
+			}
 
 			add_action( 'admin_init', array( $this, 'register_scripts' ) );
 
