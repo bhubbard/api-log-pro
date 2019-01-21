@@ -60,6 +60,21 @@ if ( ! class_exists( 'API_Log_Pro_DB' ) ) {
 		}
 
 		/**
+		 * Delete Log DB.
+		 *
+		 * @access public
+		 */
+		public function delete_log_db() {
+
+			global $wpdb;
+
+			$table   = $wpdb->prefix . 'api_log_pro';
+			$results = $wpdb->query( "DROP TABLE IF EXISTS $table" );
+
+			return $results;
+		}
+
+		/**
 		 * Create Log Meta DB.
 		 *
 		 * @access public
@@ -95,6 +110,21 @@ if ( ! class_exists( 'API_Log_Pro_DB' ) ) {
 
 			$wpdb->apilogmeta = $wpdb->prefix . 'api_log_pro_meta';
 
+		}
+
+		/**
+		 * Delete Log Meta Table.
+		 *
+		 * @access public
+		 */
+		public function delete_log_meta_table() {
+
+			global $wpdb;
+
+			$table   = $wpdb->prefix . 'api_log_pro_meta';
+			$results = $wpdb->query( "DROP TABLE IF EXISTS $table" );
+
+			return $results;
 		}
 	}
 

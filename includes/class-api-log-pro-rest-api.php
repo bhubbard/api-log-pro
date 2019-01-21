@@ -29,11 +29,9 @@ if ( ! class_exists( 'API_Log_Pro_Rest_API' ) ) {
 						'api-log-pro/v1',
 						'logs',
 						array(
-							'methods'  => array( 'get' ),
-							'callback' => array( $this, 'get_api_logs' ),
-						/*
-						'permission_callback' => array( $this, 'permission_check' ),
-						*/
+							'methods'             => array( 'get' ),
+							'callback'            => array( $this, 'get_api_logs' ),
+							'permission_callback' => array( $this, 'permission_check' ),
 						)
 					);
 				}

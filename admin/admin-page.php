@@ -16,7 +16,7 @@ add_action( 'admin_menu', 'api_log_pro_menu' );
  * @access public
  */
 function api_log_pro_menu() {
-	add_menu_page( 'API Log Pro', 'API Log Pro', 'manage_options', 'apilogpro', 'api_log_pro_page' );
+	add_menu_page( 'API Log Pro', 'API Log Pro', 'manage_options', 'apilogpro', 'api_log_pro_page', 'dashicons-cloud' );
 }
 
 /**

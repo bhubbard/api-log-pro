@@ -31,10 +31,9 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 	class API_Log_Pro {
 
 		/**
-		 * __construct function.
+		 * Constructor.
 		 *
 		 * @access public
-		 * @return void
 		 */
 		public function __construct() {
 
