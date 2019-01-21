@@ -148,6 +148,28 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 		}
 
+
+		/**
+		 * Delete API Log Item.
+		 *
+		 * @access public
+		 * @param mixed $log_id Log ID.
+		 * @param bool $meta (default: true) Optional, delete meta data.
+		 */
+		public function delete_api_log( $log_id, $meta = true ) {
+
+			global $wpdb;
+
+			$table = $wpdb->prefix . 'api_log_pro';
+
+			$results = $wpdb->get_results( "DELTE * FROM $table WHERE ID = $log_id" );
+
+			// TODO: Delete Meta.
+
+			return $results;
+
+		}
+
 		/**
 		 * Delete All Logs.
 		 *

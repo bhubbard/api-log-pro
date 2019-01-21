@@ -39,6 +39,7 @@ function api_log_pro_menu_active_subtab() {
 	return isset( $active_subtab ) ? $active_subtab : '';
 }
 
+
 /**
  * Wp_queue_settings_page function.
  *
@@ -56,7 +57,7 @@ function api_log_pro_page() {
 	<div class="wrap settings">
 
 		<form method="post" action="options.php">
-			<h1><?php esc_html_e( 'API Log Pro -', 'api-log-pro')?> <?php echo ucwords( $active_tab ); ?></h1>
+			<h1><?php esc_html_e( 'API Log Pro -', 'api-log-pro' ); ?> <?php echo esc_html( ucwords( $active_tab ) ); ?></h1>
 
 			<?php wp_enqueue_style( 'api-log-pro-admin' ); ?>
 
@@ -71,7 +72,7 @@ function api_log_pro_page() {
 						$active_tab_class = '';
 					}
 
-					echo '<a href="?page=apilogpro&#38;tab=' . esc_html( $tab ) . '" class="nav-tab ' . esc_html( $active_tab_class ) . ' nav-tab-' . esc_html( $tab ) . '">' . ucwords( $tab ) . '</a>';
+					echo '<a href="?page=apilogpro&#38;tab=' . esc_html( $tab ) . '" class="nav-tab ' . esc_html( $active_tab_class ) . ' nav-tab-' . esc_html( $tab ) . '">' . esc_html( ucwords( $tab ) ) . '</a>';
 				}
 				?>
 				</h2>	<div class="wrap">

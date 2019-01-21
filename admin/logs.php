@@ -5,7 +5,7 @@
  * @package api-log-pro
  */
 
- // Exit if accessed directly.
+// Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
 $log_id = filter_input( INPUT_GET, 'log_id' ) ?? null;

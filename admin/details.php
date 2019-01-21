@@ -19,7 +19,7 @@ if ( empty( $log ) || is_wp_error( $log ) ) {
 	esc_html_e( 'Sorry no Log exists with that ID.', 'api-log-pro' );
 } else {
 
-
+	// Get Log Meta.
 	$log_meta = $api_log_pro->get_all_log_meta( $log_id );
 
 	// Get WordPress Time Zone Settings.
@@ -31,6 +31,8 @@ if ( empty( $log ) || is_wp_error( $log ) ) {
 <div class="wrap wp-rest-api-log-entry">
 
 	<a href="<?php echo esc_url( '/wp-admin/admin.php?page=apilogpro' ); ?>" class="button"><?php esc_html_e( 'Return to Logs', 'api-log-pro' ); ?></a>
+
+<!-- <a href="#" class="button button-link-delete"><?php esc_html_e( 'Delete Log', 'api-log-pro' ); ?></a> -->
 
 <div id="poststuff">
 <div class="postbox request-headers">
