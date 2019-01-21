@@ -5,6 +5,9 @@
  * @package api-log-pro
  */
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
 $log_id = filter_input( INPUT_GET, 'log_id' );
 
 $api_log_pro = new API_Log_Pro();
@@ -12,7 +15,7 @@ $api_log_pro = new API_Log_Pro();
 $log = $api_log_pro->get_log( $log_id );
 
 if ( empty( $log ) || is_wp_error( $log ) ) {
-	echo 'Sorry no Log exists with that ID.';
+	esc_html_e( 'Sorry no Log exists with that ID.', 'api-log-pro' );
 } else {
 
 
@@ -25,14 +28,14 @@ if ( empty( $log ) || is_wp_error( $log ) ) {
 	?>
 
 <div class="wrap wp-rest-api-log-entry">
-	
+
 	<a href="<?php echo esc_url( '/wp-admin/admin.php?page=apilogpro' ); ?>"><?php esc_html_e( 'Return to Logs', 'api-log-pro' ); ?></a>
-	
+
 <div id="poststuff">
 <div class="postbox request-headers">
 	<h3 class="hndle"><span><?php esc_html_e( 'Details', 'api-log-pro' ); ?></span></h3>
 
-	<div class="inside">		
+	<div class="inside">
 		<ul>
 			<li><strong><?php esc_html_e( 'Log ID:', 'api-log-pro' ); ?></strong> <?php echo esc_html( $log->id ); ?></li>
 			<li><strong><?php esc_html_e( 'Path:', 'api-log-pro' ); ?></strong>  <?php echo esc_html( $log->path ); ?></li>

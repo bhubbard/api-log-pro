@@ -5,6 +5,9 @@
  * @package api-log-pro
  */
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
 add_action( 'admin_menu', 'api_log_pro_menu' );
 
 /**
@@ -100,7 +103,7 @@ function api_log_pro_page() {
 	color: #a0a5aa;
 	margin: 5px;
 
-	
+
 		display: inline-block;
 	min-width: 17px;
 	border: 1px solid #ccc;
@@ -117,7 +120,7 @@ function api_log_pro_page() {
 @import "https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css";
 
 			</style>
-			
+
 			<?php wp_enqueue_script( 'prism', 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js', array( 'jquery' ), null, true ); ?>
 
 				<h2 class="nav-tab-wrapper">
