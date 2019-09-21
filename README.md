@@ -7,7 +7,7 @@ A simple plugin to log WordPress Rest API Requests.
 * **Tags:** wp rest api, rest api, wp api, api, json, json api, logging
 * **Requires at least:** 5.0
 * **Tested up to:** 5.0.3
-* **Stable tag:** 0.0.1
+* **Stable tag:** 0.0.2
 * **License:** GPLv3 or later
 * **License URI:** http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -18,7 +18,7 @@ This plugin enables logging of all calls to the WordPress REST API. You can view
 
 ### API Access to Logs
 
-You can use the WordPress api to view the logs if you have `manage options` permssions as a WordPress User. Here is the endpoint:
+You can use the WordPress api to view the logs if you have `manage options` permissions as a WordPress User. Here is the endpoint:
 
 ```/wp-json/api-log-pro/v1/logs```
 

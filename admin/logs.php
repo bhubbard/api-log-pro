@@ -95,7 +95,7 @@ jQuery(function(){
 			infoEmpty: "",
 			infoFiltered: "",
 			zeroRecords: "<strong>No api logs could be found.</strong>",
-			lengthMenu: '_MENU_ logs',
+			lengthMenu: '_MENU_ Logs',
 		}
 	});
 

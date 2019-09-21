@@ -3,11 +3,11 @@
  * Plugin Name: API Log Pro
  * Description: A simple plugin to log WP Rest API Requests.
  * Author: Brandon Hubbard
- * Author URI: http://github.com/bhubbard
- * Version: 0.0.1
+ * Author URI: https://hubbardlabs.com
+ * Version: 0.0.2
  * Text Domain: api-log-pro
  * Domain Path: /languages/
- * Plugin URI: https://github.com/bhubbard/api-log-pro
+ * Plugin URI: https://github.com/hubbardlabs/api-log-pro
  * License: GPL3+
  *
  * @package api-log-pro
@@ -55,8 +55,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		 */
 		public function register_scripts() {
 			wp_register_style( 'api-log-pro-admin', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', null, '0.0.1', 'all' );
-
-			wp_register_script( 'data-tables', 'https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js', array( 'jquery' ), '1.10.19', true );
+			wp_register_script( 'data-tables',  plugin_dir_url( __FILE__ ) . 'assets/js/jquery.datatables.min.js', array( 'jquery' ), '1.10.19', true );
 		}
 
 		/**
