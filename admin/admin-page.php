@@ -47,7 +47,7 @@ function api_log_pro_menu_active_subtab() {
  */
 function api_log_pro_page() {
 
-	wp_enqueue_script( 'logs-datatable' );
+
 
 	$active_tab = api_log_pro_menu_active_tab();
 

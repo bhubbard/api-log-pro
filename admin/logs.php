@@ -8,11 +8,15 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
+
+
 $log_id = filter_input( INPUT_GET, 'log_id' ) ?? null;
 
 if ( ! empty( $log_id ) || null !== $log_id ) {
 	include_once 'details.php';
 } else {
+
+	wp_enqueue_script( 'logs-datatable' );
 
 
 	$api_log_pro = new API_Log_Pro();
