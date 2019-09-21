@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== API Log Pro ===
 Contributors: bhubbard
 Donate link: https://hubbardlabs.com
 Tags: wp rest api, rest api, wp api, api, json, json api, logging, api-log-pro
@@ -35,7 +35,13 @@ Yes, you can use the WordPress api to view the logs if you have `manage options`
 = 0.0.1 =
 * First Release, please read CHANGELOG.md for all changes.
 
+== Upgrade Notice ==
 
+Upgrade notices will be here.
+
+== Screenshots ==
+
+Screenshots coming soon.
 
 == WP-CLI Support ==
 
