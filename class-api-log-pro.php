@@ -56,7 +56,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		public function register_scripts() {
 			wp_register_style( 'api-log-pro-admin', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', null, '0.0.1', 'all' );
 			wp_register_script( 'data-tables',  plugin_dir_url( __FILE__ ) . 'assets/js/jquery.datatables.min.js', array( 'jquery' ), '1.10.19', true );
-			wp_register_script('logs-datatable', plugin_dir_url( __FILE__ ) . 'assets/js/logs-datatables.js', array('jquery', 'data-tables'), '0.0.2', true );
+			wp_register_script('logs-datatable', plugin_dir_url( __FILE__ ) . 'assets/js/logs-datatables.min.js', array('jquery', 'data-tables'), '0.0.2', true );
 		}
 
 		/**
