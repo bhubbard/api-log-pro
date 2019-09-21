@@ -33,8 +33,7 @@ if ( ! empty( $log_id ) || null !== $log_id ) {
 
 	wp_localize_script( 'data-tables', 'logs_data', array( 'data' => $data ) );
 
-
-	echo '<table class="table table-responsive wp-list-table widefat fixed striped" id="logs-table"></table>';
+	echo '<table class="table table-responsive wp-list-table widefat fixed striped logs-table" id="logs-table"></table>';
 
 	?>
 
@@ -85,6 +84,21 @@ jQuery(function(){
 			{
 				data  : 'requested_at',
 				title : 'Requested At'
+			},
+			{
+				data  : 'id',
+				title : 'Tools',
+				render: function(data, type, row){
+					if(type == "sort" || type == "type" || type == "undefined" || type == "filter"){
+						return data;
+					}
+
+					var s = data;
+
+						s = '<a class="button" href="/wp-admin/admin.php?page=apilogpro&log_id=' + data + '">View</a>';
+
+					return s;
+				}
 			}
 		],
 		pageLength: 10,
