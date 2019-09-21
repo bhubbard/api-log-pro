@@ -59,7 +59,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			wp_register_script('logs-datatable', plugin_dir_url( __FILE__ ) . 'assets/js/logs-datatables.min.js', array('jquery', 'data-tables'), '0.0.2', true );
 
 			wp_register_script( 'highlight', plugin_dir_url( __FILE__ ) . 'assets/js/highlight.pack.js', array('jquery' ), '9.15.10', false );
-			wp_register_style( 'highlight-atom-light-one', plugin_dir_url( __FILE__ ) . 'assets/css/atom-light-one.css', null, '9.15.10', 'all' );
+			wp_register_style( 'highlight-atom-light-one', plugin_dir_url( __FILE__ ) . 'assets/css/highlight-wp-theme.min.css', null, '9.15.10', 'all' );
 
 
 
