@@ -55,6 +55,9 @@ a.paginate_button {
 	font-weight:400;
 	text-align:center;
 }
+a.paginate_button:hover {
+	cursor: pointer;
+}
 
 a.paginate_button.current {
 	background:#e5e5e5;
