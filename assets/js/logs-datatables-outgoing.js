@@ -74,7 +74,7 @@ jQuery(function(){
 			}
 		],
 		pageLength: 10,
-		dom: 'f' + "<'table-responsive't>" + "<'row align-items-center bottom'<'col-sm-5'il><'col-sm-7'p>>",
+		dom: 'f' + "<'table-responsive't>" + "<'row align-items-center bottom'<'col'il><'col'p>>",
 		language: {
 			searchPlaceholder: 'Search Logs ...',
 			info: '_START_ to _END_ of _TOTAL_',
