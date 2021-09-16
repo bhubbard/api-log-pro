@@ -26,7 +26,7 @@ function api_log_pro_menu() {
  */
 function api_log_pro_menu_active_tab() {
 	$active_tab = filter_input( INPUT_GET, 'tab' );
-	return isset( $active_tab ) ? $active_tab : 'logs';
+	return isset( $active_tab ) ? $active_tab : 'incoming';
 }
 
 /**
