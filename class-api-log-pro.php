@@ -62,11 +62,6 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			wp_register_script('logs-datatable-outgoing', plugin_dir_url( __FILE__ ) . 'assets/js/logs-datatables-outgoing.js', array('jquery', 'data-tables'), '0.0.2', true );
 			wp_register_script( 'highlight', plugin_dir_url( __FILE__ ) . 'assets/js/highlight.pack.js', array('jquery' ), '9.15.10', false );
 			wp_register_style( 'highlight-atom-light-one', plugin_dir_url( __FILE__ ) . 'assets/css/highlight-wp-theme.min.css', null, '9.15.10', 'all' );
-
-
-
-
-
 		}
 
 		/**
@@ -79,11 +74,11 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		 */
 		public function log_requests( $response, $handler, $request ) {
 
-				$request_uri = esc_url( $_SERVER['REQUEST_URI'] ) ?? null;
+			$request_uri = esc_url( $_SERVER['REQUEST_URI'] ) ?? null;
 
-				$path            = $request->get_route() ?? '';
-				$method          = $request->get_method() ?? '';
-				$request_headers = $request->get_headers() ?? array();
+			$path            = $request->get_route() ?? '';
+			$method          = $request->get_method() ?? '';
+			$request_headers = $request->get_headers() ?? array();
 
 			if ( ! empty( $response ) ) {
 				$response_headers = $response->get_headers() ?? array();
@@ -91,27 +86,27 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 				$status           = $response->get_status() ?? '';
 			}
 
-				$args = array(
-					'path'             => $path ?? '',
-					'response'         => $data ?? '',
-					'response_headers' => $response_headers ?? '',
-					'request_headers'  => $request_headers ?? '',
-					'status'           => $status ?? '',
-					'method'           => $method ?? '',
-					'user'             => '',
-					'requested_at'     => current_time( 'mysql' ) ?? '0000-00-00 00:00:00',
-				);
+			$args = array(
+				'path'             => $path ?? '',
+				'response'         => $data ?? '',
+				'response_headers' => $response_headers ?? '',
+				'request_headers'  => $request_headers ?? '',
+				'status'           => $status ?? '',
+				'method'           => $method ?? '',
+				'user'             => '',
+				'requested_at'     => current_time( 'mysql' ) ?? '0000-00-00 00:00:00',
+			);
 
-				$inserted_log_id = $this->add_api_log( $args );
+			$inserted_log_id = $this->add_api_log( $args );
 
-				$query_count       = get_num_queries() ?? '';
-				$memory_usage      = memory_get_usage() ?? '';
-				$memory_peak_usage = memory_get_peak_usage() ?? '';
+			$query_count       = get_num_queries() ?? '';
+			$memory_usage      = memory_get_usage() ?? '';
+			$memory_peak_usage = memory_get_peak_usage() ?? '';
 
-				$this->add_log_meta( $inserted_log_id, 'query_count', $query_count, true );
-				$this->add_log_meta( $inserted_log_id, 'memory_usage', $memory_usage, true );
-				$this->add_log_meta( $inserted_log_id, 'memory_peak_usage', $memory_peak_usage, true );
-				$this->add_log_meta( $inserted_log_id, 'load_time', timer_stop( 1 ), true );
+			$this->add_log_meta( $inserted_log_id, 'query_count', $query_count, true );
+			$this->add_log_meta( $inserted_log_id, 'memory_usage', $memory_usage, true );
+			$this->add_log_meta( $inserted_log_id, 'memory_peak_usage', $memory_peak_usage, true );
+			$this->add_log_meta( $inserted_log_id, 'load_time', timer_stop( 1 ), true );
 
 			// Return Response.
 			return $response;

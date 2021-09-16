@@ -45,7 +45,7 @@ a.paginate_button {
 	border-color:#ddd;
 	background:#f7f7f7;
 	color:#333;
-	margin:5px 2px;
+	margin:0 2px;
 	display:inline-block;
 	min-width:15px;
 	border:1px solid #ccc;
@@ -68,4 +68,12 @@ a.paginate_button.current {
 	float:right;
 	display:inline-block;
 	margin:10px;
+	padding-top:3px;
+}
+
+#logs-table_filter {
+	margin: 10px 0;
+}
+.dataTables_length, .dataTables_paginate {
+	margin: 10px 0;
 }

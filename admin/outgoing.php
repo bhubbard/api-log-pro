@@ -18,6 +18,8 @@ if ( ! empty( $log_id ) || null !== $log_id ) {
 
 	wp_enqueue_script( 'logs-datatable-outgoing' );
 
+	// Get WordPress Time Zone Settings.
+	$gmt_offset = get_option( 'gmt_offset' ) ?? 0;
 
 	$api_log_pro = new API_Log_Pro_Outgoing();
 
@@ -34,7 +36,8 @@ if ( ! empty( $log_id ) || null !== $log_id ) {
 			'status'       => $log->status ?? '',
 			'method'       => $log->method ?? '',
 			'runtime'      => $log->runtime ?? '',
-			'requested_at' => $log->requested_at ?? '',
+			'requested_at' => esc_attr( date( 'F j, Y, g:i A T', current_time( strtotime( $log->requested_at ), $gmt_offset ) ) ) ?? '',
+			'requested_at_diff' => esc_attr( human_time_diff( current_time( strtotime( $log->requested_at ), $gmt_offset ), current_time( 'timestamp', $gmt_offset ) ) . esc_html( ' ago', 'api-log-pro' ) ) ?? '',
 		);
 	}
 
