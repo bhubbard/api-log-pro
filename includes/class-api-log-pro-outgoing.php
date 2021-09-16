@@ -41,15 +41,11 @@ if( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 	            return;
 	        }
 
+			/*
 			$query_count       = get_num_queries() ?? '';
 			$memory_usage      = memory_get_usage() ?? '';
 			$memory_peak_usage = memory_get_peak_usage() ?? '';
-
-
-			ray( 'Query Count ' . $query_count );
-			ray( 'Memory Usage ' .$memory_usage );
-			ray( 'Memory Peak Usage ' .$memory_peak_usage );
-
+			*/
 
 			// Get Domain From URL.
 			$url_parse = parse_url( $url );

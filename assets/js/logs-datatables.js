@@ -44,7 +44,18 @@ jQuery(function(){
 			},
 			{
 				data  : 'requested_at',
-				title : 'Requested At'
+				title : 'Requested At',
+				render: function(data, type, row){
+					if(type == "sort" || type == "type" || type == "undefined" || type == "filter"){
+						return data;
+					}
+
+					var s = data;
+
+						s = data + '<br /><small>' + row.requested_at_diff + '</small>';
+
+					return s;
+				}
 			},
 			{
 				data  : 'id',
