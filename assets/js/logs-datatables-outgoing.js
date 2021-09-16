@@ -12,15 +12,19 @@ jQuery(function(){
 					}
 
 					var s = data;
-
 						s = '<a href="/wp-admin/admin.php?page=apilogpro&tab=outgoing&log_id=' + data + '">' + s + '</a>';
-
 					return s;
 				}
 			},
 			{
 				data  : 'url',
 				title : 'URL',
+				render: function(data, type, row){
+					if(type == "sort" || type == "type" || type == "undefined" || type == "filter"){
+						return data;
+					}
+					return '<a href="' + data + '" target="_blank">' + data + '</a>';
+				}
 			},
 			{
 				data  : 'domain',
