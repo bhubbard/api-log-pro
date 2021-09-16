@@ -13,26 +13,18 @@ jQuery(function(){
 
 					var s = data;
 
-						s = '<a href="/wp-admin/admin.php?page=apilogpro&tab=incoming&log_id=' + data + '">' + s + '</a>';
+						s = '<a href="/wp-admin/admin.php?page=apilogpro&tab=outgoing&log_id=' + data + '">' + s + '</a>';
 
 					return s;
 				}
 			},
 			{
-				data  : 'path',
-				title : 'Path',
-				render: function(data, type, row){
-					if(type == "sort" || type == "type" || type == "undefined" || type == "filter"){
-						return data;
-					}
-
-					var s = data;
-
-						s = '<a href="/wp-json' + data + '">' + s + '</a>';
-
-					return s;
-				}
-
+				data  : 'url',
+				title : 'URL',
+			},
+			{
+				data  : 'domain',
+				title : 'Domain',
 			},
 			{
 				data  : 'status',
@@ -41,6 +33,10 @@ jQuery(function(){
 			{
 				data  : 'method',
 				title : 'Method'
+			},
+			{
+				data  : 'runtime',
+				title : 'Runtime'
 			},
 			{
 				data  : 'requested_at',
@@ -56,7 +52,7 @@ jQuery(function(){
 
 					var s = data;
 
-						s = '<a class="button" href="/wp-admin/admin.php?page=apilogpro&tab=incoming&log_id=' + data + '">View</a>';
+						s = '<a class="button" href="/wp-admin/admin.php?page=apilogpro&tab=outgoing&log_id=' + data + '">View</a>';
 
 					return s;
 				}
@@ -69,7 +65,7 @@ jQuery(function(){
 			info: '_START_ to _END_ of _TOTAL_',
 			infoEmpty: "",
 			infoFiltered: "",
-			zeroRecords: "<strong>No api logs could be found.</strong>",
+			zeroRecords: "<strong>No outgoing api logs could be found.</strong>",
 			lengthMenu: '_MENU_ Logs',
 		}
 	});

@@ -21,6 +21,8 @@ require_once 'includes/class-api-log-pro-db.php';
 require_once 'includes/class-api-log-pro-rest-api.php';
 require_once 'includes/class-api-log-pro-cli.php';
 
+require_once 'includes/class-api-log-pro-outgoing.php';
+
 require_once 'admin/admin-page.php';
 
 if ( ! class_exists( 'API_Log_Pro' ) ) {
@@ -57,7 +59,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			wp_register_style( 'api-log-pro-admin', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', null, '0.0.1', 'all' );
 			wp_register_script( 'data-tables',  plugin_dir_url( __FILE__ ) . 'assets/js/jquery.datatables.min.js', array( 'jquery' ), '1.10.19', true );
 			wp_register_script('logs-datatable', plugin_dir_url( __FILE__ ) . 'assets/js/logs-datatables.min.js', array('jquery', 'data-tables'), '0.0.2', true );
-
+			wp_register_script('logs-datatable-outgoing', plugin_dir_url( __FILE__ ) . 'assets/js/logs-datatables-outgoing.js', array('jquery', 'data-tables'), '0.0.2', true );
 			wp_register_script( 'highlight', plugin_dir_url( __FILE__ ) . 'assets/js/highlight.pack.js', array('jquery' ), '9.15.10', false );
 			wp_register_style( 'highlight-atom-light-one', plugin_dir_url( __FILE__ ) . 'assets/css/highlight-wp-theme.min.css', null, '9.15.10', 'all' );
 
@@ -199,7 +201,6 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			global $wpdb;
 
 			$table = $wpdb->prefix . 'api_log_pro';
-
 			$results = $wpdb->get_results( $wpdb->prepare( 'DELETE * FROM %1s WHERE ID = %d', $table, $log_id ) );
 
 			// TODO: Delete Meta.
@@ -218,7 +219,6 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			global $wpdb;
 
 			$table = $wpdb->prefix . 'api_log_pro';
-
 			$results = $wpdb->query( $wpdb->prepare( 'TRUNCATE TABLE %1s', $table ) );
 
 			return $results;
@@ -235,7 +235,6 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			global $wpdb;
 
 			$table = $wpdb->prefix . 'api_log_pro_meta';
-
 			$results = $wpdb->query( $wpdb->prepare( 'TRUNCATE TABLE %1s', $table ) );
 
 			return $results;
@@ -252,7 +251,6 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			global $wpdb;
 
 			$table = $wpdb->prefix . 'api_log_pro';
-
 			$results = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM %1s', $table ) );
 
 			return $results;
@@ -271,7 +269,6 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			global $wpdb;
 
 			$table = $wpdb->prefix . 'api_log_pro';
-
 			$results = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM %1s WHERE ID = %d', $table, $log_id ) );
 
 			if ( ! empty( $results ) ) {
@@ -290,13 +287,9 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		 * @param array $args (default: array()) Arguments.
 		 */
 		public function get_all_log_meta( $log_id, $args = array() ) {
-
 			global $wpdb;
-
 			$table = $wpdb->prefix . 'api_log_pro_meta';
-
 			$results = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM %1s WHERE apilog_id = %d', $table, $log_id ) );
-
 			return $results;
 		}
 
@@ -309,9 +302,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		 * @param bool   $single (default: false) Single.
 		 */
 		public function get_log_meta( $log_id, string $key = '', bool $single = false ) {
-
 				$response = get_metadata( 'log', $object_id, $key, $single ) ?? false;
-
 				return $response;
 		}
 
@@ -325,9 +316,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		 * @param bool   $unique (default: false) Unique.
 		 */
 		public function add_log_meta( $log_id, string $key, $value, $unique = false ) {
-
 			$response = add_metadata( 'apilog', $log_id, $key, $value, $unique ) ?? false;
-
 			return $response;
 		}
 
@@ -341,9 +330,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		 * @param string $prev_value (default: '') Previous Value.
 		 */
 		public function update_log_meta( $log_id, string $key, $value, $prev_value = '' ) {
-
 			$response = update_metadata( 'apilog', $log_id, $key, $value, $prev_value ) ?? false;
-
 			return $response;
 		}
 
@@ -357,9 +344,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		 * @param bool   $delete_all (default: false) Delete All.
 		 */
 		public function delete_log_meta( $log_id, string $key = '', string $value = '', bool $delete_all = false ) {
-
 			$response = delete_metadata( 'apilog', $log_id, $key, $value, $delete_all ) ?? false;
-
 			return $response;
 		}
 

@@ -73,12 +73,13 @@ if ( ! class_exists( 'API_Log_Pro_DB' ) ) {
 			$sql             =
 			"CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
-				path text,
+				url text,
+				domain text,
+				request_args text,
 				response longtext,
-				request_headers longtext,
-				response_headers longtext,
 				status mediumint(9),
 				body text,
+				runtime text,
 				method text,
 				requested_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				UNIQUE KEY id (id)
