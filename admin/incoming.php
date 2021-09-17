@@ -18,6 +18,9 @@ if ( ! empty( $log_id ) || null !== $log_id ) {
 
 	wp_enqueue_script( 'logs-datatable' );
 
+	// Get WordPress Time Zone Settings.
+	$gmt_offset = get_option( 'gmt_offset' ) ?? 0;
+
 
 	$api_log_pro = new API_Log_Pro();
 
@@ -31,12 +34,14 @@ if ( ! empty( $log_id ) || null !== $log_id ) {
 			'path'         => $log->path ?? '',
 			'status'       => $log->status ?? '',
 			'method'       => $log->method ?? '',
-			'requested_at' => $log->requested_at ?? '',
+			'requested_at' => esc_attr( date( 'F j, Y, g:i A T', current_time( strtotime( $log->requested_at ), $gmt_offset ) ) ) ?? '',
+			'requested_at_diff' => esc_attr( human_time_diff( current_time( strtotime( $log->requested_at ), $gmt_offset ), current_time( 'timestamp', $gmt_offset ) ) . esc_html( ' ago', 'api-log-pro' ) ) ?? '',
 		);
 	}
 
 	wp_localize_script( 'data-tables', 'logs_data', array( 'data' => $data ) );
 
+	echo '<p>All logs are kept for 15 days.</p>';
 	echo '<table class="logs-table table table-responsive wp-list-table widefat fixed striped display nowrap" id="logs-table" width="100%"></table>';
 
 }
