@@ -11,17 +11,32 @@ if( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 		/**
 		 * Constructor.
 		 */
-	    function __construct() {
+	    public function __construct() {
 	        add_filter( 'http_request_args', [ $this, 'start_timer' ] );
 	        add_action( 'http_api_debug', [ $this, 'capture_request' ], 10, 5 );
+
+			add_action( 'init', [ $this, 'init' ] );
+			add_action( 'api_log_pro_outgoing_cleanup_cron', [ $this, 'cleanup' ] );
 	    }
+
+
+		/**
+		 * Init.
+		 */
+		public function init() {
+
+			if ( ! wp_next_scheduled( 'api_log_pro_outgoing_cleanup_cron' ) ) {
+				wp_schedule_single_event( time() + 1296000, 'api_log_pro_outgoing_cleanup_cron' ); // 15 days.
+			}
+
+		}
 
 		/**
 		 * Start Timer.
 		 * @param  [type] $args Arguments.
 		 * @return $args Arguments.
 		 */
-		function start_timer( $args ) {
+		public function start_timer( $args ) {
 			$this->start_time = microtime( true );
 			return $args;
   		}
@@ -138,6 +153,15 @@ if( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 	            return $numberOfUnits . ' ' . $text . ( ( $numberOfUnits > 1 ) ? 's' : '' );
 	        }
     	}
+
+		/**
+		 * Cleanup.
+		 *
+		 * @access public
+		 */
+		public function cleanup() {
+		  	$this->delete_logs();
+		 }
 
 		/**
 		 * Get All Logs.

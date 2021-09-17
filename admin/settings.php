@@ -8,28 +8,32 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-
 ?>
 
-<form method="post" action="<?php echo admin_url( 'admin.php' ); ?>">
+<!--
+<form method="POST" action="options.php">
 
-	<p>Checkbox to enable incoming</p>
-	<p>Input box to set cron clear time. Default 15 days.</p>
+	<h2>Incoming</h2>
 
-	<p>Checkbox to enable outgoing</p>
-	<p>Input box to set cron clear time. Default 15 days.</p>
+	 <input type="checkbox" name="incoming" value="1" <?php checked(1, get_option('demo-checkbox'), true); ?> />
+	 <label for="my-input"><?php _e( 'Enable Incoming Logs' ); ?></label>
+	 <br />
+	<label for="my-input"><?php _e( 'Days to Keep Incoming Logs (Default 15)' ); ?></label>
+	<input type="number" id="incoming-length" name="incoming_length" placeholder="15" min="0" max="60" value="<?php echo get_option( 'my_setting_field' ); ?>">
+	<br />
+	<button class="button" name="delete_incoming_logs">Delete Incoming Logs</button>
+	<hr/>
+	<h2>Outgoing</h2>
+	<br />
+	<input type="checkbox" name="outgoing" value="1" <?php checked(1, get_option('demo-checkbox'), true); ?> />
+	<label for="my-input"><?php _e( 'Enable Outgoing Logs' ); ?></label>
+	<br />
+	<label for="my-input"><?php _e( 'Days to Keep Outgoing Logs (Default 15)' ); ?></label>
+	<input type="number" id="outgoing-length" name="outgoing_length" placeholder="15" min="0" max="60" value="<?php echo get_option( 'my_setting_field' ); ?>">
+	<br />
+	<button class="button" name="delete_outgoing_logs">Delete Outgoing Logs</button>
 
-<button class="button" name="delete_logs">Delete All Logs</button>
-<button class="button" name="delete_incoming_logs">Delete Incoming Logs</button>
-<button class="button" name="delete_outgoing_logs">Delete Outgoing Logs</button>
-
-	<input type="hidden" name="action" value="" />
-  	<input type="submit" value="Submit" />
+<input type="hidden" name="page" value="api_log_pro_page" />
 
 </form>
-
-<?php
-
-
-
-var_dump( $_POST );
+-->

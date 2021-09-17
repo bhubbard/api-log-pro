@@ -43,6 +43,7 @@ if ( ! empty( $log_id ) || null !== $log_id ) {
 
 	wp_localize_script( 'data-tables', 'logs_data', array( 'data' => $data ) );
 
+	echo '<p>All logs are kept for 15 days.</p>';
 	echo '<table class="logs-table table table-responsive wp-list-table widefat fixed striped display nowrap" id="logs-table" width="100%"></table>';
 
 }

@@ -46,7 +46,18 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 				// add_filter( 'rest_post_dispatch', array( $this, 'log_rest_api_errors' ), 10, 3 ); // Send API Errors to Error Log.
 			}
 
+			add_action( 'init', [ $this, 'init' ] );
+			add_action( 'api_log_pro_incoming_cleanup_cron', [ $this, 'cleanup' ] );
+
 			add_action( 'admin_init', array( $this, 'register_scripts' ) );
+
+		}
+
+		public function init() {
+
+			if ( ! wp_next_scheduled( 'api_log_pro_incoming_cleanup_cron' ) ) {
+		  		wp_schedule_single_event( time() + 1296000, 'api_log_pro_incoming_cleanup_cron' );
+	  		}
 
 		}
 
@@ -63,6 +74,16 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			wp_register_script( 'highlight', plugin_dir_url( __FILE__ ) . 'assets/js/highlight.pack.js', array('jquery' ), '9.15.10', false );
 			wp_register_style( 'highlight-atom-light-one', plugin_dir_url( __FILE__ ) . 'assets/css/highlight-wp-theme.min.css', null, '9.15.10', 'all' );
 		}
+
+		/**
+		 * Cleanup.
+		 *
+		 * @access public
+		 */
+		public function cleanup() {
+		  $this->delete_logs();
+		  $this->delete_logs_meta();
+		 }
 
 		/**
 		 * Log Requests.

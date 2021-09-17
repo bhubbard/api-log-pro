@@ -51,7 +51,7 @@ function api_log_pro_page() {
 
 	$active_tab = api_log_pro_menu_active_tab();
 
-	$tabs = array( 'incoming', 'outgoing', 'settings', 'support' );
+	$tabs = array( 'incoming', 'outgoing', 'support' );
 
 	?>
 	<div class="wrap settings">
