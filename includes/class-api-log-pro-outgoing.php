@@ -85,9 +85,7 @@ if ( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 				)
 			);
 
-			if ( false !== $log_data ) {
-				$this->add_outgoing_api_log( $log_data );
-			}
+			$this->add_outgoing_api_log( $log_data );
 
 		}
 

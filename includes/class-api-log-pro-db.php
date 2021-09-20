@@ -42,7 +42,7 @@ if ( ! class_exists( 'API_Log_Pro_DB' ) ) {
 			$table_name      = $wpdb->prefix . 'api_log_pro';
 			$sql             =
 			"CREATE TABLE $table_name (
-				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 				path text,
 				response longtext,
 				request_headers longtext,
@@ -71,7 +71,7 @@ if ( ! class_exists( 'API_Log_Pro_DB' ) ) {
 			$table_name      = $wpdb->prefix . 'api_log_pro_outgoing';
 			$sql             =
 			"CREATE TABLE $table_name (
-				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 				url text,
 				domain text,
 				request_args text,
