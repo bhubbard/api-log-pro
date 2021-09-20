@@ -61,6 +61,7 @@ if ( ! class_exists( 'API_Log_Pro_DB' ) ) {
 
 		/**
 		 * [create_outgoing_log_db description]
+		 *
 		 * @return [type] [description]
 		 */
 		public function create_outgoing_log_db() {

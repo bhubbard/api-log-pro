@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 
 // Get Log ID.
 $log_id = filter_input( INPUT_GET, 'log_id' ) ?? '';
-$tab = filter_input( INPUT_GET, 'tab' ) ?? '';
+$tab    = filter_input( INPUT_GET, 'tab' ) ?? '';
 
 
 $api_log_pro_outgoing = new API_Log_Pro_Outgoing();

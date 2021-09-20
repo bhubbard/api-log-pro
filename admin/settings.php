@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 
 	<h2>Incoming</h2>
 
-	 <input type="checkbox" name="incoming" value="1" <?php checked(1, get_option('demo-checkbox'), true); ?> />
+	 <input type="checkbox" name="incoming" value="1" <?php checked( 1, get_option( 'demo-checkbox' ), true ); ?> />
 	 <label for="my-input"><?php _e( 'Enable Incoming Logs' ); ?></label>
 	 <br />
 	<label for="my-input"><?php _e( 'Days to Keep Incoming Logs (Default 15)' ); ?></label>
@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
 	<hr/>
 	<h2>Outgoing</h2>
 	<br />
-	<input type="checkbox" name="outgoing" value="1" <?php checked(1, get_option('demo-checkbox'), true); ?> />
+	<input type="checkbox" name="outgoing" value="1" <?php checked( 1, get_option( 'demo-checkbox' ), true ); ?> />
 	<label for="my-input"><?php _e( 'Enable Outgoing Logs' ); ?></label>
 	<br />
 	<label for="my-input"><?php _e( 'Days to Keep Outgoing Logs (Default 15)' ); ?></label>

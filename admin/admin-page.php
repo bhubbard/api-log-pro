@@ -47,8 +47,6 @@ function api_log_pro_menu_active_subtab() {
  */
 function api_log_pro_page() {
 
-
-
 	$active_tab = api_log_pro_menu_active_tab();
 
 	$tabs = array( 'incoming', 'outgoing', 'support' );

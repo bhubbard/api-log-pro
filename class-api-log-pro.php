@@ -46,8 +46,8 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 				// add_filter( 'rest_post_dispatch', array( $this, 'log_rest_api_errors' ), 10, 3 ); // Send API Errors to Error Log.
 			}
 
-			add_action( 'init', [ $this, 'init' ] );
-			add_action( 'api_log_pro_incoming_cleanup_cron', [ $this, 'cleanup' ] );
+			add_action( 'init', array( $this, 'init' ) );
+			add_action( 'api_log_pro_incoming_cleanup_cron', array( $this, 'cleanup' ) );
 
 			add_action( 'admin_init', array( $this, 'register_scripts' ) );
 
@@ -56,8 +56,8 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		public function init() {
 
 			if ( ! wp_next_scheduled( 'api_log_pro_incoming_cleanup_cron' ) ) {
-		  		wp_schedule_single_event( time() + 1296000, 'api_log_pro_incoming_cleanup_cron' );
-	  		}
+				wp_schedule_single_event( time() + 1296000, 'api_log_pro_incoming_cleanup_cron' );
+			}
 
 		}
 
@@ -68,10 +68,10 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		 */
 		public function register_scripts() {
 			wp_register_style( 'api-log-pro-admin', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', null, '0.0.1', 'all' );
-			wp_register_script( 'data-tables',  plugin_dir_url( __FILE__ ) . 'assets/js/jquery.datatables.min.js', array( 'jquery' ), '1.11.1', true );
-			wp_register_script('logs-datatable', plugin_dir_url( __FILE__ ) . 'assets/js/logs-datatables.min.js', array('jquery', 'data-tables'), '0.0.2', true );
-			wp_register_script('logs-datatable-outgoing', plugin_dir_url( __FILE__ ) . 'assets/js/logs-datatables-outgoing.js', array('jquery', 'data-tables'), '0.0.2', true );
-			wp_register_script( 'highlight', plugin_dir_url( __FILE__ ) . 'assets/js/highlight.pack.js', array('jquery' ), '9.15.10', false );
+			wp_register_script( 'data-tables', plugin_dir_url( __FILE__ ) . 'assets/js/jquery.datatables.min.js', array( 'jquery' ), '1.11.1', true );
+			wp_register_script( 'logs-datatable', plugin_dir_url( __FILE__ ) . 'assets/js/logs-datatables.min.js', array( 'jquery', 'data-tables' ), '0.0.2', true );
+			wp_register_script( 'logs-datatable-outgoing', plugin_dir_url( __FILE__ ) . 'assets/js/logs-datatables-outgoing.js', array( 'jquery', 'data-tables' ), '0.0.2', true );
+			wp_register_script( 'highlight', plugin_dir_url( __FILE__ ) . 'assets/js/highlight.pack.js', array( 'jquery' ), '9.15.10', false );
 			wp_register_style( 'highlight-atom-light-one', plugin_dir_url( __FILE__ ) . 'assets/css/highlight-wp-theme.min.css', null, '9.15.10', 'all' );
 		}
 
@@ -81,9 +81,9 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		 * @access public
 		 */
 		public function cleanup() {
-		  $this->delete_logs();
-		  $this->delete_logs_meta();
-		 }
+			$this->delete_logs();
+			$this->delete_logs_meta();
+		}
 
 		/**
 		 * Log Requests.
@@ -216,7 +216,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			global $wpdb;
 
-			$table = $wpdb->prefix . 'api_log_pro';
+			$table   = $wpdb->prefix . 'api_log_pro';
 			$results = $wpdb->get_results( $wpdb->prepare( 'DELETE * FROM %1s WHERE ID = %d', $table, $log_id ) );
 
 			// TODO: Delete Meta.
@@ -234,7 +234,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			global $wpdb;
 
-			$table = $wpdb->prefix . 'api_log_pro';
+			$table   = $wpdb->prefix . 'api_log_pro';
 			$results = $wpdb->query( $wpdb->prepare( 'TRUNCATE TABLE %1s', $table ) );
 
 			return $results;
@@ -250,7 +250,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			global $wpdb;
 
-			$table = $wpdb->prefix . 'api_log_pro_meta';
+			$table   = $wpdb->prefix . 'api_log_pro_meta';
 			$results = $wpdb->query( $wpdb->prepare( 'TRUNCATE TABLE %1s', $table ) );
 
 			return $results;
@@ -266,7 +266,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			global $wpdb;
 
-			$table = $wpdb->prefix . 'api_log_pro';
+			$table   = $wpdb->prefix . 'api_log_pro';
 			$results = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM %1s', $table ) );
 
 			return $results;
@@ -284,7 +284,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			global $wpdb;
 
-			$table = $wpdb->prefix . 'api_log_pro';
+			$table   = $wpdb->prefix . 'api_log_pro';
 			$results = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM %1s WHERE ID = %d', $table, $log_id ) );
 
 			if ( ! empty( $results ) ) {
@@ -304,7 +304,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 		 */
 		public function get_all_log_meta( $log_id, $args = array() ) {
 			global $wpdb;
-			$table = $wpdb->prefix . 'api_log_pro_meta';
+			$table   = $wpdb->prefix . 'api_log_pro_meta';
 			$results = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM %1s WHERE apilog_id = %d', $table, $log_id ) );
 			return $results;
 		}
