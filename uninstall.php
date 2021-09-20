@@ -21,5 +21,5 @@ defined( 'ABSPATH' ) || exit;
 
 	// Drop Outgoing Table.
 	$outgoing_table = $wpdb->prefix . 'api_log_pro_outgoing';
-	$results   = $wpdb->query( $wpdb->prepare( 'DROP TABLE IF EXISTS %1s', $log_table ) );
+	$results        = $wpdb->query( $wpdb->prepare( 'DROP TABLE IF EXISTS %1s', $log_table ) );
 
