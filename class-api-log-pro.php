@@ -4,7 +4,7 @@
  * Description: A simple plugin to log WP Rest API Requests.
  * Author: Brandon Hubbard
  * Author URI: https://hubbardlabs.com
- * Version: 0.0.4
+ * Version: 0.0.5
  * Text Domain: api-log-pro
  * Domain Path: /languages/
  * Plugin URI: https://github.com/hubbardlabs/api-log-pro
