@@ -19,3 +19,7 @@ defined( 'ABSPATH' ) || exit;
 	$meta_table = $wpdb->prefix . 'api_log_pro_meta';
 	$results    = $wpdb->query( $wpdb->prepare( 'DROP TABLE IF EXISTS %1s', $meta_table ) );
 
+	// Drop Outgoing Table.
+	$outgoing_table = $wpdb->prefix . 'api_log_pro_outgoing';
+	$results   = $wpdb->query( $wpdb->prepare( 'DROP TABLE IF EXISTS %1s', $log_table ) );
+
