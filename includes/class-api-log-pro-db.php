@@ -38,7 +38,6 @@ if ( ! class_exists( 'API_Log_Pro_DB' ) ) {
 
 			global $wpdb;
 
-			$wpdb->show_errors();
 			$charset_collate = $wpdb->get_charset_collate();
 			$table_name      = $wpdb->prefix . 'api_log_pro';
 			$sql             =
@@ -68,7 +67,6 @@ if ( ! class_exists( 'API_Log_Pro_DB' ) ) {
 
 			global $wpdb;
 
-			$wpdb->show_errors();
 			$charset_collate = $wpdb->get_charset_collate();
 			$table_name      = $wpdb->prefix . 'api_log_pro_outgoing';
 			$sql             =
