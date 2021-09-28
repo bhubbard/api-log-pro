@@ -60,9 +60,16 @@ if ( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 		 */
 		public function capture_request( $response, $context, $transport, $args, $url ) {
 
+			// Skip WP Cron requests.
 			if ( false !== strpos( $url, 'doing_wp_cron' ) ) {
 				return;
 			}
+
+			// Skip Admin Ajax requests.
+			if ( is_admin() && wp_doing_ajax() ) {
+				return;
+			}
+
 			// Get Domain From URL.
 			$url_parse = wp_parse_url( $url );
 			$host      = $url_parse['host'];
@@ -150,7 +157,7 @@ if ( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 			$table   = $wpdb->prefix . 'api_log_pro_outgoing';
 
 			// Order By.
-			$order_by = ! empty( $args['order_by'] ) ? esc_sql( $args['order_by'] ) : 'DATE(requested_at)';
+			$order_by = ! empty( $args['order_by'] ) ? esc_sql( $args['order_by'] ) : 'id';
 
 			// Order.
 			$order = ! empty( $args['order'] ) ? esc_sql( $args['order'] ) : 'DESC';

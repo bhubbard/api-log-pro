@@ -2,6 +2,7 @@ jQuery(function(){
 	var table = jQuery("#logs-table").DataTable({
 		data   : logs_data.data,
 		responsive: true,
+		order: [[ 0, "desc" ]],
 		columns: [
 			{
 				data  : 'id',

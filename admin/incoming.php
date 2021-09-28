@@ -28,14 +28,18 @@ if ( ! empty( $log_id ) || null !== $log_id ) {
 
 	$data = array();
 
+
 	foreach ( $logs as $log ) {
+
+		$requested_at = strtotime( $log->requested_at, $gmt_offset * 3600 );
+
 		$data[] = array(
 			'id'                => $log->id ?? '',
 			'path'              => $log->path ?? '',
 			'status'            => $log->status ?? '',
 			'method'            => $log->method ?? '',
-			'requested_at'      => esc_attr( date( 'F j, Y, g:i A T', current_time( strtotime( $log->requested_at ), $gmt_offset ) ) ) ?? '',
-			'requested_at_diff' => esc_attr( human_time_diff( current_time( strtotime( $log->requested_at ), $gmt_offset ), current_time( 'timestamp', $gmt_offset ) ) . esc_html( ' ago', 'api-log-pro' ) ) ?? '',
+			'requested_at'      => esc_attr( date( 'F j, Y, g:i A T', $requested_at ) ) ?? '',
+			'requested_at_diff' => esc_attr( human_time_diff( $requested_at, current_time( 'timestamp', $gmt_offset ), $gmt_offset ). esc_html( ' ago', 'api-log-pro' ) ) ?? '',
 		);
 	}
 
