@@ -3,6 +3,15 @@ jQuery(function(){
 		data   : logs_data.data,
 		responsive: true,
 		order: [[ 0, "desc" ]],
+		createdRow: function (row, data, dataIndex) {
+			console.log(data);
+			if (data["status"] !== "200") {
+    			jQuery(row).addClass('error');
+			}
+		},
+		columnDefs: [
+    		{ width: "75px", targets: 0 }
+],
 		columns: [
 			{
 				data  : 'id',
@@ -41,7 +50,25 @@ jQuery(function(){
 			},
 			{
 				data  : 'runtime',
-				title : 'Runtime'
+				title : 'Runtime',
+					render: function(data, type, row){
+					if(type == "sort" || type == "type" || type == "undefined" || type == "filter"){
+						return data;
+					}
+
+					var s = data;
+
+					if( data >= 5 ){
+						s = '<span style="background-color:red;padding:5px;color:#fff">' + data + '</span>';
+					}
+
+					if( data >= 3 && data < 5 ){
+						s = '<span style="background-color:yellow;padding:5px;color:#111">' + data + '</span>';
+					}
+
+
+					return s;
+				}
 			},
 			{
 				data  : 'requested_at',

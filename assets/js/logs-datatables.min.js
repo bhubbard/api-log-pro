@@ -3,6 +3,9 @@ jQuery(function(){
 		data   : logs_data.data,
 		responsive: true,
 		order: [[ 0, "desc" ]],
+		columnDefs: [
+    		{ width: "75px", targets: 0 }
+	],
 		columns: [
 			{
 				data  : 'id',
