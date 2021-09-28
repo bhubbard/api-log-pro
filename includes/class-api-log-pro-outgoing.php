@@ -237,6 +237,33 @@ if ( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 			return $results;
 		}
 
+		/**
+		 * Get Logs Count.
+		 *
+		 */
+		public function get_log_count( $args = array() ) {
+			global $wpdb;
+			$table   = $wpdb->prefix . 'api_log_pro_outgoing';
+			$results = $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM %1s', $table ) );
+			return $results;
+		}
+
+		/**
+		 * Get Total Runtime.
+		 *
+		 * @param array $args Arguments.
+		 */
+		public function get_total_runtime( $args = array() ) {
+		}
+
+		/**
+		 * Get Average Runtime.
+		 *
+		 * @param array $args Arguments.
+		 */
+		public function get_avg_runtime( $args = array() ) {
+		}
+
 	}
 
 	new API_Log_Pro_Outgoing();
