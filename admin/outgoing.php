@@ -21,13 +21,18 @@ if ( ! empty( $log_id ) || null !== $log_id ) {
 	// Get WordPress Time Zone Settings.
 	$gmt_offset = get_option( 'gmt_offset' ) ?? 0;
 
+
 	$api_log_pro = new API_Log_Pro_Outgoing();
 
 	$logs = $api_log_pro->get_logs();
 
 	$data = array();
 
+	date_default_timezone_set( $gmt_offset );
+
 	foreach ( $logs as $log ) {
+
+		$requested_at = current_time( strtotime( $log->requested_at, $gmt_offset ), $gmt_offset );
 
 		$data[] = array(
 			'id'                => $log->id ?? '',
@@ -36,8 +41,8 @@ if ( ! empty( $log_id ) || null !== $log_id ) {
 			'status'            => $log->status ?? '',
 			'method'            => $log->method ?? '',
 			'runtime'           => $log->runtime ?? '',
-			'requested_at'      => esc_attr( date( 'F j, Y, g:i A T', current_time( strtotime( $log->requested_at ), $gmt_offset ) ) ) ?? '',
-			'requested_at_diff' => esc_attr( human_time_diff( current_time( strtotime( $log->requested_at ), $gmt_offset ), current_time( 'timestamp', $gmt_offset ) ) . esc_html( ' ago', 'api-log-pro' ) ) ?? '',
+			'requested_at'      => esc_attr( date( 'F j, Y, g:i A', $requested_at ) ) ?? '',
+			'requested_at_diff' => esc_attr( human_time_diff( $requested_at, current_time( 'timestamp' ) ) . esc_html( ' ago', 'api-log-pro' ) ) ?? '',
 		);
 	}
 

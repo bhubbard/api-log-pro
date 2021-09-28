@@ -60,9 +60,16 @@ if ( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 		 */
 		public function capture_request( $response, $context, $transport, $args, $url ) {
 
+			// Skip WP Cron requests.
 			if ( false !== strpos( $url, 'doing_wp_cron' ) ) {
 				return;
 			}
+
+			// Skip Admin Ajax requests.
+			if ( is_admin() && wp_doing_ajax() ) {
+				return;
+			}
+
 			// Get Domain From URL.
 			$url_parse = wp_parse_url( $url );
 			$host      = $url_parse['host'];
@@ -148,7 +155,24 @@ if ( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 			global $wpdb;
 
 			$table   = $wpdb->prefix . 'api_log_pro_outgoing';
-			$results = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM `%1s`', $table ) );
+
+			// Order By.
+			$order_by = ! empty( $args['order_by'] ) ? esc_sql( $args['order_by'] ) : 'id';
+
+			// Order.
+			$order = ! empty( $args['order'] ) ? esc_sql( $args['order'] ) : 'DESC';
+
+			// Fields.
+			$fields = ! empty( $args['fields'] ) && is_array( $args['fields'] ) ? esc_sql( implode( ',', $args['fields'] ) ) : '*';
+
+			// Offset.
+			$offset = ! empty( $args['offset'] ) ? esc_sql( abs( $args['offset'] ) ) : 0;
+
+			// Page Size.
+			$page_size = ! empty( $args['page_size'] ) ? esc_sql( abs( $args['page_size'] ) ) : 25;
+
+			// Get Results.
+			$results = $wpdb->get_results( $wpdb->prepare(  "SELECT %1s FROM %2s ORDER BY %3s %4s LIMIT %5s OFFSET %6s", array( $fields, $table, $order_by, $order, $page_size, $offset ) ) );
 
 			return $results;
 
@@ -210,6 +234,67 @@ if ( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 			$table   = $wpdb->prefix . 'api_log_pro_outgoing';
 			$results = $wpdb->query( $wpdb->prepare( 'TRUNCATE TABLE %1s', $table ) );
 
+			return $results;
+		}
+
+		/**
+		 * Get Logs Count.
+		 *
+		 */
+		public function get_log_count( $args = array() ) {
+			global $wpdb;
+			$table   = $wpdb->prefix . 'api_log_pro_outgoing';
+			$results = $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM %1s', $table ) );
+			return $results;
+		}
+
+		/**
+		 * Get Total Runtime.
+		 *
+		 * @param array $args Arguments.
+		 */
+		public function get_total_runtime( $args = array() ) {
+			global $wpdb;
+			$table   = $wpdb->prefix . 'api_log_pro_outgoing';
+			$results = $wpdb->get_var( $wpdb->prepare( 'SELECT SUM(DISTINCT runtime) FROM %1s', $table ) );
+			return $results;
+		}
+
+		/**
+		 * Get Average Runtime.
+		 *
+		 * @param array $args Arguments.
+		 */
+		public function get_avg_runtime( $args = array() ) {
+				global $wpdb;
+			$table   = $wpdb->prefix . 'api_log_pro_outgoing';
+			$results = $wpdb->get_var( $wpdb->prepare( 'SELECT AVG(DISTINCT runtime) FROM %1s', $table ) );
+			return $results;
+		}
+
+		/**
+		 * Undocumented function
+		 *
+		 * @param array $args
+		 * @return void
+		 */
+		public function get_max_runtime( $args = array() ) {
+			global $wpdb;
+			$table   = $wpdb->prefix . 'api_log_pro_outgoing';
+			$results = $wpdb->get_var( $wpdb->prepare( 'SELECT MAX(runtime) FROM %1s', $table ) );
+			return $results;
+		}
+
+		/**
+		 * Undocumented function
+		 *
+		 * @param array $args
+		 * @return void
+		 */
+		public function get_min_runtime( $args = array() ) {
+			global $wpdb;
+			$table   = $wpdb->prefix . 'api_log_pro_outgoing';
+			$results = $wpdb->get_var( $wpdb->prepare( 'SELECT MIN(runtime) FROM %1s', $table ) );
 			return $results;
 		}
 

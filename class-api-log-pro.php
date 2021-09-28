@@ -4,7 +4,7 @@
  * Description: A simple plugin to log WP Rest API Requests.
  * Author: Brandon Hubbard
  * Author URI: https://hubbardlabs.com
- * Version: 0.0.6
+ * Version: 0.0.7
  * Text Domain: api-log-pro
  * Domain Path: /languages/
  * Plugin URI: https://github.com/hubbardlabs/api-log-pro
@@ -267,7 +267,23 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			global $wpdb;
 
 			$table   = $wpdb->prefix . 'api_log_pro';
-			$results = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM %1s', $table ) );
+
+			// Order By.
+			$order_by = ! empty( $args['order_by'] ) ? esc_sql( $args['order_by'] ) : 'id';
+
+			// Order.
+			$order = ! empty( $args['order'] ) ? esc_sql( $args['order'] ) : 'DESC';
+
+			// Fields.
+			$fields = ! empty( $args['fields'] ) && is_array( $args['fields'] ) ? esc_sql( implode( ',', $args['fields'] ) ) : '*';
+
+			// Offset.
+			$offset = ! empty( $args['offset'] ) ? esc_sql( abs( $args['offset'] ) ) : 0;
+
+			// Page Size.
+			$page_size = ! empty( $args['page_size'] ) ? esc_sql( abs( $args['page_size'] ) ) : 25;
+
+			$results = $wpdb->get_results( $wpdb->prepare(  "SELECT %1s FROM %2s ORDER BY %3s %4s LIMIT %5s OFFSET %6s", array( $fields, $table, $order_by, $order, $page_size, $offset ) ) );
 
 			return $results;
 

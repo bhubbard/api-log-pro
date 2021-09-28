@@ -6,8 +6,8 @@ A simple plugin to log WordPress Rest API Requests.
 * **Contributors:** [bhubbard](https://profiles.wordpress.org/bhubbard)
 * **Tags:** wp rest api, rest api, wp api, api, json, json api, logging
 * **Requires at least:** 5.0
-* **Tested up to:** 5.0.3
-* **Stable tag:** 0.0.2
+* **Tested up to:** 5.8.1
+* **Stable tag:** 0.0.7
 * **License:** GPLv3 or later
 * **License URI:** http://www.gnu.org/licenses/gpl-3.0.html
 
