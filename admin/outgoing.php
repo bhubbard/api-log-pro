@@ -28,8 +28,6 @@ if ( ! empty( $log_id ) || null !== $log_id ) {
 
 	$data = array();
 
-	date_default_timezone_set( $gmt_offset );
-
 	foreach ( $logs as $log ) {
 
 		$requested_at = current_time( strtotime( $log->requested_at, $gmt_offset ), $gmt_offset );
