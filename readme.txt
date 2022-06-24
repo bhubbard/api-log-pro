@@ -3,8 +3,8 @@ Contributors: hubbardlabs, bhubbard
 Donate link: https://hubbardlabs.com
 Tags: wp rest api, rest api, wp api, api, json, json api, logging, api-log-pro
 Requires at least: 4.6
-Tested up to: 5.8.1
-Stable tag: 0.0.9
+Tested up to: 6.0
+Stable tag: 1.0.0
 Requires PHP: 7.0.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -23,7 +23,15 @@ This plugin enables logging of all calls to the WordPress REST API. You can view
 
 == Frequently Asked Questions ==
 
-= Can we view the log via the api? =
+= What is the difference between outgoing and incoming logs? =
+
+Incoming are requests made to the WordPress Reset API, while outbound requests are made to 3rd party API services using the wp_remote_request() function.
+
+= How long are logs kept? =
+
+Currently logs are kept for 15 days.
+
+= Can I view the log via the api? =
 
 Yes, you can use the WordPress api to view the logs if you have `manage options` permissions as a WordPress User. Here is the endpoint:
 
