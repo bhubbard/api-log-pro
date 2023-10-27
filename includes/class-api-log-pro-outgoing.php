@@ -35,7 +35,6 @@ if ( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 			if ( ! wp_next_scheduled( 'api_log_pro_outgoing_cleanup_cron' ) ) {
 				wp_schedule_single_event( time() + 1296000, 'api_log_pro_outgoing_cleanup_cron' ); // 15 days.
 			}
-
 		}
 
 		/**
@@ -93,7 +92,6 @@ if ( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 			);
 
 			$this->add_outgoing_api_log( $log_data );
-
 		}
 
 		/**
@@ -132,7 +130,6 @@ if ( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 			);
 
 			return $wpdb->insert_id;
-
 		}
 
 		/**
@@ -154,7 +151,7 @@ if ( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 
 			global $wpdb;
 
-			$table   = $wpdb->prefix . 'api_log_pro_outgoing';
+			$table = $wpdb->prefix . 'api_log_pro_outgoing';
 
 			// Order By.
 			$order_by = ! empty( $args['order_by'] ) ? esc_sql( $args['order_by'] ) : 'id';
@@ -172,10 +169,9 @@ if ( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 			$page_size = ! empty( $args['page_size'] ) ? esc_sql( abs( $args['page_size'] ) ) : 25;
 
 			// Get Results.
-			$results = $wpdb->get_results( $wpdb->prepare(  "SELECT %1s FROM %2s ORDER BY %3s %4s LIMIT %5s OFFSET %6s", array( $fields, $table, $order_by, $order, $page_size, $offset ) ) );
+			$results = $wpdb->get_results( $wpdb->prepare( 'SELECT %1s FROM %2s ORDER BY %3s %4s LIMIT %5s OFFSET %6s', array( $fields, $table, $order_by, $order, $page_size, $offset ) ) );
 
 			return $results;
-
 		}
 
 		/**
@@ -197,7 +193,6 @@ if ( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 			} else {
 				return new WP_Error( 'invalid_log_id', __( 'Sorry no log exists with that ID.', 'api-log-pro' ) );
 			}
-
 		}
 
 
@@ -218,7 +213,6 @@ if ( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 
 			// TODO: Delete Meta.
 			return $results;
-
 		}
 
 		/**
@@ -239,7 +233,6 @@ if ( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 
 		/**
 		 * Get Logs Count.
-		 *
 		 */
 		public function get_log_count( $args = array() ) {
 			global $wpdb;
@@ -297,7 +290,6 @@ if ( ! class_exists( 'API_Log_Pro_Outgoing' ) ) {
 			$results = $wpdb->get_var( $wpdb->prepare( 'SELECT MIN(runtime) FROM %1s', $table ) );
 			return $results;
 		}
-
 	}
 
 	new API_Log_Pro_Outgoing();

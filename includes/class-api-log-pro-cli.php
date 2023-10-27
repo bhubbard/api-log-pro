@@ -32,7 +32,6 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			 * @access public
 			 */
 			public function __construct() {
-
 			}
 
 			/**
@@ -53,9 +52,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 				} else {
 					WP_CLI::error( __( 'The Logs are either empty, or there was an error.', 'api-log-pro' ) );
 				}
-
 			}
-
 		}
 
 		WP_CLI::add_command( 'api-log-pro', 'API_Log_Pro_CLI' );

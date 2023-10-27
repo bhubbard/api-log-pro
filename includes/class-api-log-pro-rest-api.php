@@ -24,7 +24,7 @@ if ( ! class_exists( 'API_Log_Pro_Rest_API' ) ) {
 
 			add_action(
 				'rest_api_init',
-				function() {
+				function () {
 					register_rest_route(
 						'api-log-pro/v1',
 						'logs',
@@ -36,7 +36,6 @@ if ( ! class_exists( 'API_Log_Pro_Rest_API' ) ) {
 					);
 				}
 			);
-
 		}
 
 		/**
@@ -66,7 +65,6 @@ if ( ! class_exists( 'API_Log_Pro_Rest_API' ) ) {
 			}
 			return true;
 		}
-
 	}
 
 	new API_Log_Pro_Rest_API();

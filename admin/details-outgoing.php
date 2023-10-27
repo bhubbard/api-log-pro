@@ -32,13 +32,12 @@ if ( empty( $log ) || is_wp_error( $log ) ) {
 	// Get WordPress Time Zone Settings.
 	$gmt_offset = get_option( 'gmt_offset' ) ?? 0;
 
-
-
 	?>
 
 <div class="wrap wp-rest-api-log-entry">
 		<a href="<?php echo esc_url( '/wp-admin/admin.php?page=apilogpro&tab=outgoing' ); ?>" class="button"><?php esc_html_e( 'Return to Logs', 'api-log-pro' ); ?></a>
 	<?php
+	echo '<a href="' . esc_url( add_query_arg('action', 'delete_log', admin_url('admin-post.php') ) ) . '&log_id=' . $log_id . '" class="button button-primary">Delete Log</a>';
 		// TODO: Delete Button
 		// echo '<input class="button button-link-delete" type="submit" name="delete_log" id="delete-log-'. $log_id .'" value="'. __( 'Delete Log', 'rest-api-log' ) . '" />'; !
 	?>

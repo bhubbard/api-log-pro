@@ -48,7 +48,6 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			add_action( 'api_log_pro_incoming_cleanup_cron', array( $this, 'cleanup' ) );
 
 			add_action( 'admin_init', array( $this, 'register_scripts' ) );
-
 		}
 
 		public function init() {
@@ -56,7 +55,6 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			if ( ! wp_next_scheduled( 'api_log_pro_incoming_cleanup_cron' ) ) {
 				wp_schedule_single_event( time() + 1296000, 'api_log_pro_incoming_cleanup_cron' );
 			}
-
 		}
 
 		/**
@@ -128,7 +126,6 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			// Return Response.
 			return $response;
-
 		}
 
 		/**
@@ -198,7 +195,6 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			);
 
 			return $wpdb->insert_id;
-
 		}
 
 
@@ -218,7 +214,6 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			// TODO: Delete Meta.
 			return $results;
-
 		}
 
 		/**
@@ -263,7 +258,7 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 
 			global $wpdb;
 
-			$table   = $wpdb->prefix . 'api_log_pro';
+			$table = $wpdb->prefix . 'api_log_pro';
 
 			// Order By.
 			$order_by = ! empty( $args['order_by'] ) ? esc_sql( $args['order_by'] ) : 'id';
@@ -280,10 +275,9 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			// Page Size.
 			$page_size = ! empty( $args['page_size'] ) ? esc_sql( abs( $args['page_size'] ) ) : 25;
 
-			$results = $wpdb->get_results( $wpdb->prepare(  "SELECT %1s FROM %2s ORDER BY %3s %4s LIMIT %5s OFFSET %6s", array( $fields, $table, $order_by, $order, $page_size, $offset ) ) );
+			$results = $wpdb->get_results( $wpdb->prepare( 'SELECT %1s FROM %2s ORDER BY %3s %4s LIMIT %5s OFFSET %6s', array( $fields, $table, $order_by, $order, $page_size, $offset ) ) );
 
 			return $results;
-
 		}
 
 		/**
@@ -305,7 +299,6 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			} else {
 				return new WP_Error( 'invalid_log_id', __( 'Sorry no log exists with that ID.', 'api-log-pro' ) );
 			}
-
 		}
 
 		/**
@@ -376,8 +369,6 @@ if ( ! class_exists( 'API_Log_Pro' ) ) {
 			$response = delete_metadata( 'apilog', $log_id, $key, $value, $delete_all ) ?? false;
 			return $response;
 		}
-
-
 	}
 
 	new API_Log_Pro();

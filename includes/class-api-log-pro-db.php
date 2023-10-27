@@ -26,7 +26,6 @@ if ( ! class_exists( 'API_Log_Pro_DB' ) ) {
 				add_action( 'activated_plugin', array( $this, 'create_outgoing_log_db' ) );
 				add_action( 'activated_plugin', array( $this, 'create_log_meta_db' ) );
 				add_action( 'plugins_loaded', array( $this, 'register_log_meta_table' ) );
-
 		}
 
 		/**
@@ -55,7 +54,6 @@ if ( ! class_exists( 'API_Log_Pro_DB' ) ) {
 			) $charset_collate;";
 			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 			dbDelta( $sql );
-
 		}
 
 		/**
@@ -85,7 +83,6 @@ if ( ! class_exists( 'API_Log_Pro_DB' ) ) {
 			) $charset_collate;";
 			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 			dbDelta( $sql );
-
 		}
 
 		/**
@@ -153,7 +150,6 @@ if ( ! class_exists( 'API_Log_Pro_DB' ) ) {
 			global $wpdb;
 
 			$wpdb->apilogmeta = $wpdb->prefix . 'api_log_pro_meta';
-
 		}
 
 		/**

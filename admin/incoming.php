@@ -28,8 +28,8 @@ if ( ! empty( $log_id ) || null !== $log_id ) {
 
 	$data = array();
 
-	if (0 != $gmt_offset) {
-		date_default_timezone_set($gmt_offset);
+	if ( 0 != $gmt_offset ) {
+		date_default_timezone_set( $gmt_offset );
 	}
 
 
@@ -51,5 +51,6 @@ if ( ! empty( $log_id ) || null !== $log_id ) {
 
 	echo '<p>All logs are kept for 15 days.</p>';
 	echo '<table class="logs-table table table-responsive wp-list-table widefat fixed striped display nowrap" id="logs-table" width="100%"></table>';
+
 
 }

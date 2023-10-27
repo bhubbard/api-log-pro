@@ -93,5 +93,4 @@ function api_log_pro_page() {
 
 </div>
 	<?php
-
 }

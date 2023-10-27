@@ -29,7 +29,7 @@ if ( ! empty( $log_id ) || null !== $log_id ) {
 	$data = array();
 
 	if ( 0 != $gmt_offset ) {
-		date_default_timezone_set($gmt_offset);
+		date_default_timezone_set( $gmt_offset );
 	}
 
 	foreach ( $logs as $log ) {
